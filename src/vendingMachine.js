@@ -1,5 +1,5 @@
-import {Drink} from "./drink";
-import {CHANGE_COINS} from "./constants";
+import {Beverage} from "./beverage.js";
+import {CHANGE_COINS} from "./constants.js";
 
 export class VendingMachine {
     constructor() {
@@ -18,7 +18,7 @@ export class VendingMachine {
     }
 
     addDrink(name, price, quantity) {
-        const newDrink = new Drink(name, price, quantity);
+        const newDrink = new Beverage(name, price, quantity);
         this.drinks.push(newDrink);
     }
 
