@@ -3,9 +3,10 @@ module.exports = {
         browser: true,
         es2021: true,
         node: true,
+        mocha: true
     },
     extends: ['eslint:recommended', 'airbnb-base', 'prettier'],
-    plugins: ['prettier'],
+    plugins: ['prettier', 'mocha'],
     rules: {
         'import/prefer-default-export':'off',
         'import/extensions': ['off'],
