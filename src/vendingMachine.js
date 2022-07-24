@@ -1,9 +1,12 @@
 import {Beverage} from "./beverage.js";
 import {CHANGE_COINS} from "./constants.js";
+import {Ui} from "./ui.js";
+
+const ui = new Ui();
 
 export class VendingMachine {
     constructor() {
-        this.drinks = [];
+        this.beverage = [];
         this.balance = 0;
         this.changeCoins = [
             {'text': '500원', 'quantity': 0},
@@ -17,9 +20,9 @@ export class VendingMachine {
         this.balance += balance;
     }
 
-    addDrink(name, price, quantity) {
+    addBeverage(name, price, quantity) {
         const newDrink = new Beverage(name, price, quantity);
-        this.drinks.push(newDrink);
+        this.beverage.push(newDrink);
     }
 
     /**
@@ -40,5 +43,30 @@ export class VendingMachine {
         this.changeCoins[1].quantity += coin100;
         this.changeCoins[2].quantity += coin50;
         this.changeCoins[3].quantity += coin10;
+    }
+
+    purchaseBeverage(beverageName){
+        const index = this.findIndexByName(beverageName, this.beverage);
+        const targetBeverage = this.beverage[index];
+        if (this.balance < targetBeverage.price ) {
+            ui.showAlert('잔액이 부족합니다');
+            return
+        }
+        if (targetBeverage.quantity < 1) {
+            ui.showAlert('품절입니다');
+            return
+        }
+        this.balance -= targetBeverage.price;
+        targetBeverage.quantity--;
+    }
+
+    /**
+     * 대상 객체 배열에서 특정 이름을 가진 객체의 인덱스를 리턴
+     * @param name
+     * @param target
+     * @return {*}
+     */
+    findIndexByName(name, target){
+        return target.findIndex(i=>i.name===name);
     }
 }
