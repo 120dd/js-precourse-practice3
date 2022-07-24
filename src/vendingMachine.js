@@ -14,6 +14,11 @@ export class VendingMachine {
             {'text': '50원', 'quantity': 0},
             {'text': '10원', 'quantity': 0},
         ]
+        this.initialize();
+    }
+    
+    initialize(){
+        ui.createTabButtons();
     }
 
     insertBalance(balance) {
