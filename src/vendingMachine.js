@@ -1,16 +1,21 @@
 import {Product} from "./product.js";
 import {CHANGE_COINS} from "./constants.js";
+import {Coins} from "./coins.js";
 
 export class VendingMachine {
     constructor() {
         this.product = [];
         this.balance = 0;
         this.changeCoins = [
-            {'text': '500원', 'quantity': 0},
-            {'text': '100원', 'quantity': 0},
-            {'text': '50원', 'quantity': 0},
-            {'text': '10원', 'quantity': 0},
+            this.createCoins(500,'원',0),
+            this.createCoins(100,'원',0),
+            this.createCoins(50,'원',0),
+            this.createCoins(10,'원',0),
         ]
+    }
+    
+    createCoins(faceValue, currency, quantity){
+        return new Coins(faceValue,currency,quantity)
     }
 
     insertBalance(balance) {
