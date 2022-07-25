@@ -42,17 +42,17 @@ export class VendingMachine {
         this.changeCoins[3].quantity += coin10;
     }
 
-    purchaseBeverage(beverageName){
+    purchaseProduct(beverageName){
         const index = this.findIndexByName(beverageName, this.product);
-        const targetBeverage = this.product[index];
-        if (this.balance < targetBeverage.price ) {
+        const targetProduct = this.product[index];
+        if (this.balance < targetProduct.price ) {
             return false;
         }
-        if (targetBeverage.quantity < 1) {
+        if (targetProduct.quantity < 1) {
             return false;
         }
-        this.balance -= targetBeverage.price;
-        targetBeverage.quantity--;
+        this.balance -= targetProduct.price;
+        targetProduct.quantity--;
         return true;
     }
 
