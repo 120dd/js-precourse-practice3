@@ -3,7 +3,7 @@ import {CHANGE_COINS} from "./constants.js";
 
 export class VendingMachine {
     constructor() {
-        this.beverage = [];
+        this.product = [];
         this.balance = 0;
         this.changeCoins = [
             {'text': '500원', 'quantity': 0},
@@ -17,9 +17,9 @@ export class VendingMachine {
         this.balance += balance;
     }
 
-    addBeverage(name, price, quantity) {
+    addProduct(name, price, quantity) {
         const newDrink = new Product(name, price, quantity);
-        this.beverage.push(newDrink);
+        this.product.push(newDrink);
     }
 
     /**
@@ -43,8 +43,8 @@ export class VendingMachine {
     }
 
     purchaseBeverage(beverageName){
-        const index = this.findIndexByName(beverageName, this.beverage);
-        const targetBeverage = this.beverage[index];
+        const index = this.findIndexByName(beverageName, this.product);
+        const targetBeverage = this.product[index];
         if (this.balance < targetBeverage.price ) {
             return false;
         }
