@@ -52,7 +52,7 @@ export class VendingMachine {
             return false;
         }
         this.balance -= targetProduct.price;
-        targetProduct.quantity--;
+        targetProduct.quantity -= 1;
         return true;
     }
 
