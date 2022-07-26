@@ -1,6 +1,1 @@
-export const COIN_TYPE = {
-    '500':'500',
-    '100':'100',
-    '50':'50',
-    '10':'10',
-}
+export const COIN_TYPE = [500,100,50,10];
