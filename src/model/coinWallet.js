@@ -8,10 +8,18 @@ export class CoinWallet{
             [COIN_TYPE['50'],4],
             [COIN_TYPE['10'],2],
         ]);
-        this.totalBalance = getTotalBalance();
+        this.totalBalance = this.getTotalBalance();
     }
 
     insertCoin(coinType, amount){
         this.wallet.set(COIN_TYPE[coinType],this.wallet.get(coinType)+amount);
+    }
+
+    getTotalBalance(){
+        let totalBalance = 0;
+        for (const coin of this.wallet.entries()){
+            totalBalance += Number(coin[0])*coin[1]
+        }
+        return totalBalance;
     }
 }
