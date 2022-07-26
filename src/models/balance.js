@@ -1,6 +1,15 @@
 export class Balance{
-    constructor() {
-        this.currency = '원';
-        this.quantity = 0;
+    /**
+     * 
+     * @param {number} quantity
+     * @param {string} currency
+     */
+    constructor(quantity, currency) {
+        this.quantity = quantity;
+        this.currency = currency;
+    }
+    
+    changeBalance(quantity){
+        this.quantity += quantity;
     }
 }
