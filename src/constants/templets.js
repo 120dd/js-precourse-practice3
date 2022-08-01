@@ -1,11 +1,11 @@
 export const $app = document.querySelector("#app");
-export const $productTab = document.createElement("div");
+export const $productManageTab = document.createElement("div");
 export const $chargeCoinTab = document.createElement("div");
 export const $productPurchaseTab = document.createElement("div");
 
 export const COMMON_HTML = `
 <h1>
-    ㅁㅁㅁ
+    Machine
 </h1>
 <div class="tab-buttons">
     <button id = "product-add-menu">상품 관리</button>

@@ -1,7 +1,7 @@
 import {
     $app,
     $chargeCoinTab, $productPurchaseTab,
-    $productTab,
+    $productManageTab,
     CHARGE_COIN_TAB,
     COMMON_HTML,
     PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB
@@ -24,17 +24,37 @@ export class View {
     }
 
     renderProductManageTab() {
-        $productTab.innerHTML = PRODUCT_MANAGE_TAB;
-        $app.after($productTab);
+        $productManageTab.innerHTML = PRODUCT_MANAGE_TAB;
+        $app.after($productManageTab);
     }
     
     renderChargeCoinTab(){
         $chargeCoinTab.innerHTML = CHARGE_COIN_TAB;
-        $productTab.after($chargeCoinTab);
+        $chargeCoinTab.style.display = 'none';
+        $productManageTab.after($chargeCoinTab);
     }
 
     renderProductPurchaseTab(){
         $productPurchaseTab.innerHTML = PRODUCT_PURCHASE_TAB;
+        $productPurchaseTab.style.display = 'none';
         $chargeCoinTab.after($productPurchaseTab)
+    }
+    
+    showProductManageTab(){
+        $productManageTab.style.display = 'block';
+        $chargeCoinTab.style.display = 'none';
+        $productPurchaseTab.style.display = 'none';
+    }
+
+    showChargeCoinTab(){
+        $productManageTab.style.display = 'none';
+        $chargeCoinTab.style.display = 'block';
+        $productPurchaseTab.style.display = 'none';
+    }
+
+    showProductPurchaseTab(){
+        $productManageTab.style.display = 'none';
+        $chargeCoinTab.style.display = 'none';
+        $productPurchaseTab.style.display = 'block';
     }
 }
