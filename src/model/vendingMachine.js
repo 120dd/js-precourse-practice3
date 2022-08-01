@@ -1,4 +1,4 @@
-class VendingMachine {
+export class VendingMachine {
     constructor() {
     }
 }
