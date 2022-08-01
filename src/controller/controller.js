@@ -3,8 +3,6 @@ import {View} from "../view/index.js";
 
 export class Controller {
     constructor() {
-        this.view = "";
-        this.vendingMachine = "";
         this.init();
     }
 

@@ -1,16 +1,17 @@
-import {COMMON_HTML} from "../constants/templets.js";
+import {$app, $productView, COMMON_HTML, PRODUCT_MANAGE_TAB} from "../constants/templets.js";
 
 export class View {
     constructor() {
-        this.init();
-    }
-
-    init(){
         this.renderCommon();
+        this.renderProductManageTab();
     }
 
     renderCommon(){
-        const $app = document.querySelector('#app');
         $app.innerHTML = COMMON_HTML;
+    }
+    
+    renderProductManageTab(){
+        $productView.innerHTML = PRODUCT_MANAGE_TAB;
+        $app.after($productView);
     }
 }
