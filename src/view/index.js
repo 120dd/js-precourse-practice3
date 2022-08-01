@@ -1,3 +1,5 @@
+import {COMMON_HTML} from "../constants/templets.js";
+
 export class View {
     constructor() {
         this.init();
@@ -9,6 +11,6 @@ export class View {
 
     renderCommon(){
         const $app = document.querySelector('#app');
-        $app.innerHTML = `<div>hello world!</div>`;
+        $app.innerHTML = COMMON_HTML;
     }
 }
