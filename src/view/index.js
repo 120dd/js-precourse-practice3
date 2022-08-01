@@ -1,10 +1,10 @@
 import {
     $app,
-    $chargeCoinTab,
+    $chargeCoinTab, $productPurchaseTab,
     $productTab,
     CHARGE_COIN_TAB,
     COMMON_HTML,
-    PRODUCT_MANAGE_TAB
+    PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB
 } from "../constants/templets.js";
 
 export class View {
@@ -16,6 +16,7 @@ export class View {
         this.renderCommon();
         this.renderProductManageTab();
         this.renderChargeCoinTab();
+        this.renderProductPurchaseTab();
     }
 
     renderCommon() {
@@ -30,5 +31,10 @@ export class View {
     renderChargeCoinTab(){
         $chargeCoinTab.innerHTML = CHARGE_COIN_TAB;
         $productTab.after($chargeCoinTab);
+    }
+
+    renderProductPurchaseTab(){
+        $productPurchaseTab.innerHTML = PRODUCT_PURCHASE_TAB;
+        $chargeCoinTab.after($productPurchaseTab)
     }
 }

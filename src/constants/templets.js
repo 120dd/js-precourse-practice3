@@ -1,6 +1,7 @@
 export const $app = document.querySelector("#app");
 export const $productTab = document.createElement("div");
 export const $chargeCoinTab = document.createElement("div");
+export const $productPurchaseTab = document.createElement("div");
 
 export const COMMON_HTML = `
 <h1>
@@ -58,5 +59,47 @@ export const CHARGE_COIN_TAB = `
         <th>10원</th>
         <th id="vending-machine-coin-10-quantity"></th>
     </tr>
+</table>
+`;
+
+export const PRODUCT_PURCHASE_TAB = `
+<h3>금액 투입</h3>
+<input type="number" id="charge-input">
+<button id="charge-button">투입하기</button>
+<p id="charge-amount">투입한금액:</p>
+<h3>구매할 수 있는 상품 현황</h3>
+<table border="1">
+<tr>
+<th>상품명</th>
+<th>개수</th>
+<th>수량</th>
+<th>구매</th>
+</tr>
+<!--상품 추가될 때 아이디값 부여하기-->
+</table>
+<h3>잔돈</h3>
+<button id="coin-return-button">반환하기</button>
+<table border="1">
+    <tr>
+        <th>동전</th>
+        <th>개수</th>
+    </tr>
+    <tr>
+        <th>500원</th>
+        <th id="coin-500-quantity"></th>
+    </tr>
+    <tr>
+        <th>100원</th>
+        <th id="coin-100-quantity"></th>
+    </tr>
+    <tr>
+        <th>50원</th>
+        <th id="coin-50-quantity"></th>
+    </tr>
+    <tr>
+        <th>10원</th>
+        <th id="coin-10-quantity"></th>
+    </tr>
+    <!--상품 추가될 때 아이디값 부여하기-->
 </table>
 `;
