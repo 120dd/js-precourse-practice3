@@ -1,9 +1,3 @@
-export const TAB_BUTTON_IDS = {
-    PRODUCT_ADD_MENU_ID: 'product-add-menu',
-    VENDING_MACHINE_MANAGE_MENU_ID: 'vending-machine-manage-menu',
-    PRODUCT_PURCHASE_MENU: 'product-purchase-menu',
-}
-
 export const SELECTOR = {
     COIN_MENU: "#vending-machine-manage-menu",
     COIN_CHARGE_INPUT: "#vending-machine-charge-input",
