@@ -68,11 +68,12 @@ export class Index {
             const $productList = document.createElement('tr');
             $productList.setAttribute("class",SELECTOR.PRODUCT_MANAGE_ITEM);
             $productList.innerHTML = PRODUCT_LIST(product.name,product.price,product.quantity);
-            document.querySelector('#productTableHeader').after($productList)
+            document.querySelector('#added-product-table').appendChild($productList);
         });
     }
     
     removeProductList(className){
-        document.querySelector(`.${className}`).innerHTML = ''
+        const nodeList = document.querySelectorAll(`.${className}`);
+        nodeList.forEach((node)=>{node.remove()})
     }
 }

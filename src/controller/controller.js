@@ -37,13 +37,15 @@ export class Controller {
     addProductButtonHandler() {
         this.getButtons().$productAddButton.onclick = (e) => {
             e.preventDefault();
-            const productName = this.getInputs().$productNameInput.value;
-            const productPrice = this.getInputs().$productPriceInput.value;
-            const productQuantity = this.getInputs().$productQuantityInput.value;
-            this.vendingMachine.addProduct(productName,productPrice,productQuantity);
+            const {$productNameInput, $productPriceInput, $productQuantityInput} = this.getInputs();
+            this.vendingMachine.addProduct($productNameInput.value,$productPriceInput.value,$productQuantityInput.value);
             this.view.showProductList(this.vendingMachine.products)
-            console.log(this.vendingMachine.products);
+            this.resetListValue([$productNameInput,$productPriceInput,$productQuantityInput])
         }
+    }
+    
+    resetListValue(resetList){
+        resetList.forEach((resetTarget) => {resetTarget.value = ''});
     }
 
     getButtons() {

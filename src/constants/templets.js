@@ -18,7 +18,7 @@ export const PRODUCT_MANAGE_TAB = `
     <button id="product-add-button">추가하기</button>
 </form>
 <h2>상품 현황</h2>
-<table border="1">
+<table id="added-product-table" border="1">
 <tr id="productTableHeader">
 <th>상품명</th>
 <th>가격</th>
