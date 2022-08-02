@@ -17,4 +17,5 @@ export const SELECTOR = {
     PURCHASE_CHARGE_BUTTON: "#charge-button",
     PURCHASE_ITEM_BUTTON: ".purchase-button",
     PURCHASE_ITEM_QUANTITY: ".product-purchase-quantity",
+    PRODUCT_MANAGE_ITEM:'product-manage-item',
 };

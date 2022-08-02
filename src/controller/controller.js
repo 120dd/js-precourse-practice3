@@ -41,6 +41,8 @@ export class Controller {
             const productPrice = this.getInputs().$productPriceInput.value;
             const productQuantity = this.getInputs().$productQuantityInput.value;
             this.vendingMachine.addProduct(productName,productPrice,productQuantity);
+            this.view.showProductList(this.vendingMachine.products)
+            console.log(this.vendingMachine.products);
         }
     }
 

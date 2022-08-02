@@ -1,4 +1,3 @@
-
 export const COMMON_HTML = `
 <h1>
     Machine
@@ -20,12 +19,11 @@ export const PRODUCT_MANAGE_TAB = `
 </form>
 <h2>상품 현황</h2>
 <table border="1">
-<tr>
+<tr id="productTableHeader">
 <th>상품명</th>
-<th>개수</th>
+<th>가격</th>
 <th>수량</th>
 </tr>
-<!--상품 추가될 때 아이디값 부여하기-->
 </table>
 `;
 
@@ -98,4 +96,10 @@ export const PRODUCT_PURCHASE_TAB = `
     </tr>
     <!--상품 추가될 때 아이디값 부여하기-->
 </table>
+`;
+
+export const PRODUCT_LIST = (name, price, quantity) => `
+        <td class="product-manage-name">${name}</td>
+        <td class="product-manage-price">${price}</td>
+        <td class="product-manage-quantity">${quantity}</td>
 `;

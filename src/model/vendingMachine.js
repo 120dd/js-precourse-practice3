@@ -2,7 +2,10 @@ import {Product} from "./product.js";
 
 export class VendingMachine {
     constructor() {
-        this.products = [];
+        this.products = [
+            new Product('콜라',1200, 40),
+            new Product('사이다',800, 22),
+        ];
         this.machinWallet = [];
         this.userBalance = 0;
     }
