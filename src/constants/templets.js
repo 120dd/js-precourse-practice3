@@ -1,7 +1,3 @@
-export const $app = document.querySelector("#app");
-export const $productManageTab = document.createElement("div");
-export const $chargeCoinTab = document.createElement("div");
-export const $productPurchaseTab = document.createElement("div");
 
 export const COMMON_HTML = `
 <h1>

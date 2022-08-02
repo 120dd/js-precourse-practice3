@@ -1,5 +1,5 @@
 import {VendingMachine} from "../model/vendingMachine.js";
-import {View} from "../view/index.js";
+import {Index} from "../view/index.js";
 
 export class Controller {
     constructor() {
@@ -8,30 +8,35 @@ export class Controller {
 
     init() {
         this.vendingMachine = new VendingMachine();
-        this.view = new View();
+        this.view = new Index();
         this.productManageButtonHandler();
         this.chargeCoinButtonHandler();
         this.productPurchaseButtonHandler();
     }
 
     productManageButtonHandler() {
-        const $productManageButton = document.querySelector('#product-add-menu');
-        $productManageButton.onclick = () => {
+        this.getButtons().$productManageButton.onclick = () => {
             this.view.showProductManageTab();
         }
     }
 
     chargeCoinButtonHandler() {
-        const $chargeCoinButton = document.querySelector('#vending-machine-manage-menu');
-        $chargeCoinButton.onclick = () => {
+        this.getButtons().$chargeCoinButton.onclick = () => {
             this.view.showChargeCoinTab();
         }
     }
 
     productPurchaseButtonHandler() {
-        const $productPurchaseButton = document.querySelector('#product-purchase-menu');
-        $productPurchaseButton.onclick = () => {
+        this.getButtons().$productPurchaseButton.onclick = () => {
             this.view.showProductPurchaseTab();
+        }
+    }
+
+    getButtons() {
+        return {
+            $productManageButton: document.querySelector('#product-add-menu'),
+            $chargeCoinButton: document.querySelector('#vending-machine-manage-menu'),
+            $productPurchaseButton: document.querySelector('#product-purchase-menu'),
         }
     }
 }

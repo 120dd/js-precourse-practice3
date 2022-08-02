@@ -1,14 +1,17 @@
 import {
-    $app,
-    $chargeCoinTab, $productPurchaseTab,
-    $productManageTab,
     CHARGE_COIN_TAB,
     COMMON_HTML,
     PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB
 } from "../constants/templets.js";
 
-export class View {
+export class Index {
     constructor() {
+        this.$app = document.querySelector("#app"); 
+        this.tabs = {
+            $productManageTab:document.createElement("div"),
+            $chargeCoinTab:document.createElement("div"),
+            $productPurchaseTab:document.createElement("div"),
+        };
         this.init();
     }
 
@@ -20,41 +23,41 @@ export class View {
     }
 
     renderCommon() {
-        $app.innerHTML = COMMON_HTML;
+        this.$app.innerHTML = COMMON_HTML;
     }
 
     renderProductManageTab() {
-        $productManageTab.innerHTML = PRODUCT_MANAGE_TAB;
-        $app.after($productManageTab);
+        this.tabs.$productManageTab.innerHTML = PRODUCT_MANAGE_TAB;
+        this.$app.appendChild(this.tabs.$productManageTab);
     }
     
     renderChargeCoinTab(){
-        $chargeCoinTab.innerHTML = CHARGE_COIN_TAB;
-        $chargeCoinTab.style.display = 'none';
-        $productManageTab.after($chargeCoinTab);
+        this.tabs.$chargeCoinTab.innerHTML = CHARGE_COIN_TAB;
+        this.tabs.$chargeCoinTab.style.display = 'none';
+        this.tabs.$productManageTab.after(this.tabs.$chargeCoinTab);
     }
 
     renderProductPurchaseTab(){
-        $productPurchaseTab.innerHTML = PRODUCT_PURCHASE_TAB;
-        $productPurchaseTab.style.display = 'none';
-        $chargeCoinTab.after($productPurchaseTab)
+        this.tabs.$productPurchaseTab.innerHTML = PRODUCT_PURCHASE_TAB;
+        this.tabs.$productPurchaseTab.style.display = 'none';
+        this.tabs.$chargeCoinTab.after(this.tabs.$productPurchaseTab)
     }
     
     showProductManageTab(){
-        $productManageTab.style.display = 'block';
-        $chargeCoinTab.style.display = 'none';
-        $productPurchaseTab.style.display = 'none';
+        this.tabs.$productManageTab.style.display = 'block';
+        this.tabs.$chargeCoinTab.style.display = 'none';
+        this.tabs.$productPurchaseTab.style.display = 'none';
     }
 
     showChargeCoinTab(){
-        $productManageTab.style.display = 'none';
-        $chargeCoinTab.style.display = 'block';
-        $productPurchaseTab.style.display = 'none';
+        this.tabs.$productManageTab.style.display = 'none';
+        this.tabs.$chargeCoinTab.style.display = 'block';
+        this.tabs.$productPurchaseTab.style.display = 'none';
     }
 
     showProductPurchaseTab(){
-        $productManageTab.style.display = 'none';
-        $chargeCoinTab.style.display = 'none';
-        $productPurchaseTab.style.display = 'block';
+        this.tabs.$productManageTab.style.display = 'none';
+        this.tabs.$chargeCoinTab.style.display = 'none';
+        this.tabs.$productPurchaseTab.style.display = 'block';
     }
 }
