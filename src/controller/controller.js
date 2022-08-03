@@ -39,30 +39,37 @@ export class Controller {
         this.getButtons().$productAddButton.onclick = (e) => {
             e.preventDefault();
             const {$productNameInput, $productPriceInput, $productQuantityInput} = this.getInputs();
-            this.vendingMachine.addProduct($productNameInput.value,$productPriceInput.value,$productQuantityInput.value);
+            this.vendingMachine.addProduct($productNameInput.value, $productPriceInput.value, $productQuantityInput.value);
             this.view.renderProductList(this.vendingMachine.products)
-            this.resetListValue([$productNameInput,$productPriceInput,$productQuantityInput])
+            this.resetListValue([$productNameInput, $productPriceInput, $productQuantityInput])
         }
     }
-    
-    resetListValue(resetList){
+
+    resetListValue(resetList) {
         // eslint-disable-next-line no-param-reassign
-        resetList.forEach((resetTarget) => {resetTarget.value = ''});
+        resetList.forEach((resetTarget) => {
+            resetTarget.value = ''
+        });
     }
-    
-    machineCoinChargeButtonHandler(){
-        const {$machineCoin500Quantity, $machineCoin100Quantity, $machineCoin50Quantity, $machineCoin10Quantity} = this.getMachineCoinQuantityNodes();
+
+    machineCoinChargeButtonHandler() {
+        const {
+            $machineCoin500Quantity,
+            $machineCoin100Quantity,
+            $machineCoin50Quantity,
+            $machineCoin10Quantity
+        } = this.getMachineCoinQuantityNodes();
         const {$chargeCoinInput} = this.getInputs();
         this.getButtons().$chargeCoinButton.onclick = () => {
             this.vendingMachine.addMachineCoinRandomly($chargeCoinInput.value);
-            this.view.renderMachineCoins($machineCoin500Quantity,this.vendingMachine.machineCoins[0].quantity);
-            this.view.renderMachineCoins($machineCoin100Quantity,this.vendingMachine.machineCoins[1].quantity);
-            this.view.renderMachineCoins($machineCoin50Quantity,this.vendingMachine.machineCoins[2].quantity);
-            this.view.renderMachineCoins($machineCoin10Quantity,this.vendingMachine.machineCoins[3].quantity);
+            this.view.renderMachineCoins($machineCoin500Quantity, this.vendingMachine.machineCoins[0].quantity);
+            this.view.renderMachineCoins($machineCoin100Quantity, this.vendingMachine.machineCoins[1].quantity);
+            this.view.renderMachineCoins($machineCoin50Quantity, this.vendingMachine.machineCoins[2].quantity);
+            this.view.renderMachineCoins($machineCoin10Quantity, this.vendingMachine.machineCoins[3].quantity);
+            $chargeCoinInput.value = '';
         }
-        $chargeCoinInput.value = '';
     }
-    
+
     getButtons() {
         return {
             $productManageTabButton: document.querySelector(SELECTOR.PRODUCT_MENU),
@@ -82,8 +89,8 @@ export class Controller {
         }
     }
 
-    getMachineCoinQuantityNodes(){
-        return{
+    getMachineCoinQuantityNodes() {
+        return {
             $machineCoin500Quantity: document.querySelector(SELECTOR.COIN_500),
             $machineCoin100Quantity: document.querySelector(SELECTOR.COIN_100),
             $machineCoin50Quantity: document.querySelector(SELECTOR.COIN_50),

@@ -60,7 +60,7 @@ export const PRODUCT_PURCHASE_TAB = `
 <h3>금액 투입</h3>
 <input type="number" id="charge-input">
 <button id="charge-button">투입하기</button>
-<p id="charge-amount">투입한금액:</p>
+<p id="charge-amount">투입한 금액:</p>
 <h3>구매할 수 있는 상품 현황</h3>
 <table border="1">
 <tr>
@@ -69,7 +69,6 @@ export const PRODUCT_PURCHASE_TAB = `
 <th>수량</th>
 <th>구매</th>
 </tr>
-<!--상품 추가될 때 아이디값 부여하기-->
 </table>
 <h3>잔돈</h3>
 <button id="coin-return-button">반환하기</button>
@@ -102,8 +101,4 @@ export const PRODUCT_LIST = (name, price, quantity) => `
         <td class="product-manage-name">${name}</td>
         <td class="product-manage-price">${price}</td>
         <td class="product-manage-quantity">${quantity}</td>
-`;
-
-export const MACHINE_COIN = (quantity) => `
-<td class="product-manage-name">${quantity}</td>
 `;
