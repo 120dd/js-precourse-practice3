@@ -1,7 +1,7 @@
 import {
     CHARGE_COIN_TAB, CHARGED_BALANCE,
     COMMON_HTML, PRODUCT_LIST,
-    PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB
+    PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB, PURCHASE_PRODUCT_LIST
 } from "../constants/templets.js";
 import {SELECTOR} from "../constants/constants.js";
 
@@ -21,6 +21,7 @@ export class View {
         this.renderProductManageTab();
         this.renderChargeCoinTab();
         this.renderProductPurchaseTab();
+        this.renderPurcharseList();
     }
 
     renderCommon() {
@@ -83,5 +84,15 @@ export class View {
 
     renderUserBalance(amount) {
         document.querySelector(SELECTOR.PURCHASE_CHARGE_AMOUNT).innerHTML = CHARGED_BALANCE(amount);
+    }
+    
+    renderPurcharseList(productList){
+        document.querySelector(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList('product-purchase-item');
+        productList && productList.map((product) => {
+            const $product = document.createElement('tr');
+            $product.setAttribute('class','product-purchase-item');
+            $product.innerHTML = PURCHASE_PRODUCT_LIST(product.name,product.price,product.quantity);
+            document.querySelector('#purchaseMenuTable').appendChild($product);
+        });
     }
 }

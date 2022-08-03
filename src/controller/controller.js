@@ -42,6 +42,7 @@ export class Controller {
             const {$productNameInput, $productPriceInput, $productQuantityInput} = this.getInputs();
             this.vendingMachine.addProduct($productNameInput.value, $productPriceInput.value, $productQuantityInput.value);
             this.view.renderProductList(this.vendingMachine.products);
+            this.view.renderPurcharseList(this.vendingMachine.products);
             this.resetListValue([$productNameInput, $productPriceInput, $productQuantityInput]);
         }
     }
