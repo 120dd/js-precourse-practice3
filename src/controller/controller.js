@@ -15,6 +15,7 @@ export class Controller {
         this.productPurchaseButtonTabHandler();
         this.addProductButtonHandler();
         this.machineCoinChargeButtonHandler();
+        this.chargeUserBalanceButton();
     }
 
     productManageTabButtonHandler() {
@@ -69,6 +70,13 @@ export class Controller {
             $chargeCoinInput.value = '';
         }
     }
+    
+    chargeUserBalanceButton(){
+        this.getButtons().$chargeUserBalance.onclick = () => {
+            const balanceInput = this.getInputs().$chargeUserBalanceInput; 
+            this.vendingMachine.chargeUserBalance(balanceInput.value);
+        }
+    }
 
     getButtons() {
         return {
@@ -77,6 +85,7 @@ export class Controller {
             $productPurchaseTabButton: document.querySelector(SELECTOR.PURCHASE_MENU),
             $productAddButton: document.querySelector(SELECTOR.PRODUCT_ADD_BUTTON),
             $chargeCoinButton: document.querySelector(SELECTOR.COIN_CHARGE_BUTTON),
+            $chargeUserBalance: document.querySelector(SELECTOR.PURCHASE_CHARGE_BUTTON),
         }
     }
 
@@ -86,6 +95,7 @@ export class Controller {
             $productPriceInput: document.querySelector(SELECTOR.PRODUCT_PRICE_INPUT),
             $productQuantityInput: document.querySelector(SELECTOR.PRODUCT_QUANTITY_INPUT),
             $chargeCoinInput: document.querySelector(SELECTOR.COIN_CHARGE_INPUT),
+            $chargeUserBalanceInput: document.querySelector(SELECTOR.PURCHASE_CHARGE_INPUT),
         }
     }
 

@@ -43,4 +43,8 @@ export class VendingMachine {
         const coinIndex = this.machineCoins.findIndex(coin=>coin.value === coinValue);
         this.machineCoins[coinIndex].quantity += 1;
     }
+    
+    chargeUserBalance(balance){
+        console.log(balance);
+    }
 }
