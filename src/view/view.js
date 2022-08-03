@@ -1,5 +1,5 @@
 import {
-    CHARGE_COIN_TAB,
+    CHARGE_COIN_TAB, CHARGED_BALANCE,
     COMMON_HTML, PRODUCT_LIST,
     PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB
 } from "../constants/templets.js";
@@ -79,5 +79,9 @@ export class View {
     
     renderMachineCoins(target,quantity){
         target.innerText = quantity;
+    }
+
+    renderUserBalance(amount) {
+        document.querySelector(SELECTOR.PURCHASE_CHARGE_AMOUNT).innerHTML = CHARGED_BALANCE(amount);
     }
 }

@@ -1,7 +1,6 @@
 import {VendingMachine} from "../model/vendingMachine.js";
 import {View} from "../view/view.js";
 import {SELECTOR} from "../constants/constants.js";
-import {CHARGED_BALANCE} from "../constants/templets.js";
 
 export class Controller {
     constructor() {
@@ -42,8 +41,8 @@ export class Controller {
             e.preventDefault();
             const {$productNameInput, $productPriceInput, $productQuantityInput} = this.getInputs();
             this.vendingMachine.addProduct($productNameInput.value, $productPriceInput.value, $productQuantityInput.value);
-            this.view.renderProductList(this.vendingMachine.products)
-            this.resetListValue([$productNameInput, $productPriceInput, $productQuantityInput])
+            this.view.renderProductList(this.vendingMachine.products);
+            this.resetListValue([$productNameInput, $productPriceInput, $productQuantityInput]);
         }
     }
 
@@ -55,33 +54,24 @@ export class Controller {
     }
 
     machineCoinChargeButtonHandler() {
-        const {
-            $machineCoin500Quantity,
-            $machineCoin100Quantity,
-            $machineCoin50Quantity,
-            $machineCoin10Quantity
-        } = this.getNodes();
+        const {$machine500Quantity, $machine100Quantity, $machine50Quantity, $machine10Quantity} = this.getNodes();
         const {$chargeCoinInput} = this.getInputs();
         this.getButtons().$chargeCoinButton.onclick = () => {
             this.vendingMachine.addMachineCoinRandomly($chargeCoinInput.value);
-            this.view.renderMachineCoins($machineCoin500Quantity, this.vendingMachine.machineCoins[0].quantity);
-            this.view.renderMachineCoins($machineCoin100Quantity, this.vendingMachine.machineCoins[1].quantity);
-            this.view.renderMachineCoins($machineCoin50Quantity, this.vendingMachine.machineCoins[2].quantity);
-            this.view.renderMachineCoins($machineCoin10Quantity, this.vendingMachine.machineCoins[3].quantity);
+            this.view.renderMachineCoins($machine500Quantity, this.vendingMachine.machineCoins[0].quantity);
+            this.view.renderMachineCoins($machine100Quantity, this.vendingMachine.machineCoins[1].quantity);
+            this.view.renderMachineCoins($machine50Quantity, this.vendingMachine.machineCoins[2].quantity);
+            this.view.renderMachineCoins($machine10Quantity, this.vendingMachine.machineCoins[3].quantity);
             $chargeCoinInput.value = '';
         }
     }
-    
-    chargeUserBalanceButton(){
+
+    chargeUserBalanceButton() {
         this.getButtons().$chargeUserBalance.onclick = () => {
-            const balanceInput = this.getInputs().$chargeUserBalanceInput; 
+            const balanceInput = this.getInputs().$chargeUserBalanceInput;
             this.vendingMachine.chargeUserBalance(balanceInput.value);
-            this.renderUserBalance(this.vendingMachine.userBalance);
+            this.view.renderUserBalance(this.vendingMachine.userBalance);
         }
-    }
-    
-    renderUserBalance(amount){
-        this.getNodes().$userChargeAmount.innerHTML = CHARGED_BALANCE(amount);
     }
 
     getButtons() {
@@ -107,11 +97,10 @@ export class Controller {
 
     getNodes() {
         return {
-            $machineCoin500Quantity: document.querySelector(SELECTOR.COIN_500),
-            $machineCoin100Quantity: document.querySelector(SELECTOR.COIN_100),
-            $machineCoin50Quantity: document.querySelector(SELECTOR.COIN_50),
-            $machineCoin10Quantity: document.querySelector(SELECTOR.COIN_10),
-            $userChargeAmount: document.querySelector(SELECTOR.PURCHASE_CHARGE_AMOUNT),
+            $machine500Quantity: document.querySelector(SELECTOR.COIN_500),
+            $machine100Quantity: document.querySelector(SELECTOR.COIN_100),
+            $machine50Quantity: document.querySelector(SELECTOR.COIN_50),
+            $machine10Quantity: document.querySelector(SELECTOR.COIN_10),
         }
     }
 }

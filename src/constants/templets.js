@@ -104,3 +104,10 @@ export const PRODUCT_LIST = (name, price, quantity) => `
 `;
 
 export const CHARGED_BALANCE = (balance) => `투입한 금액: ${balance}원`;
+
+export const PURCHASE_PRODUCT_LIST = (name, price, quantity) => `
+        <td class="product-manage-name">${name}</td>
+        <td class="product-manage-price">${price}</td>
+        <td class="product-manage-quantity">${quantity}</td>
+        <td class="product-manage-quantity"><button>구매하기</button></td>
+`;
