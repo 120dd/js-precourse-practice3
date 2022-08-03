@@ -102,3 +102,5 @@ export const PRODUCT_LIST = (name, price, quantity) => `
         <td class="product-manage-price">${price}</td>
         <td class="product-manage-quantity">${quantity}</td>
 `;
+
+export const CHARGED_BALANCE = (balance) => `투입한 금액: ${balance}원`;

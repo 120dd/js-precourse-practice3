@@ -1,6 +1,7 @@
 import {VendingMachine} from "../model/vendingMachine.js";
 import {View} from "../view/view.js";
 import {SELECTOR} from "../constants/constants.js";
+import {CHARGED_BALANCE} from "../constants/templets.js";
 
 export class Controller {
     constructor() {
@@ -59,7 +60,7 @@ export class Controller {
             $machineCoin100Quantity,
             $machineCoin50Quantity,
             $machineCoin10Quantity
-        } = this.getMachineCoinQuantityNodes();
+        } = this.getNodes();
         const {$chargeCoinInput} = this.getInputs();
         this.getButtons().$chargeCoinButton.onclick = () => {
             this.vendingMachine.addMachineCoinRandomly($chargeCoinInput.value);
@@ -75,7 +76,12 @@ export class Controller {
         this.getButtons().$chargeUserBalance.onclick = () => {
             const balanceInput = this.getInputs().$chargeUserBalanceInput; 
             this.vendingMachine.chargeUserBalance(balanceInput.value);
+            this.renderUserBalance(this.vendingMachine.userBalance);
         }
+    }
+    
+    renderUserBalance(amount){
+        this.getNodes().$userChargeAmount.innerHTML = CHARGED_BALANCE(amount);
     }
 
     getButtons() {
@@ -99,12 +105,13 @@ export class Controller {
         }
     }
 
-    getMachineCoinQuantityNodes() {
+    getNodes() {
         return {
             $machineCoin500Quantity: document.querySelector(SELECTOR.COIN_500),
             $machineCoin100Quantity: document.querySelector(SELECTOR.COIN_100),
             $machineCoin50Quantity: document.querySelector(SELECTOR.COIN_50),
             $machineCoin10Quantity: document.querySelector(SELECTOR.COIN_10),
+            $userChargeAmount: document.querySelector(SELECTOR.PURCHASE_CHARGE_AMOUNT),
         }
     }
 }
