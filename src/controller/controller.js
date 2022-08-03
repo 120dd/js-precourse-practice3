@@ -46,12 +46,14 @@ export class Controller {
     }
     
     resetListValue(resetList){
+        // eslint-disable-next-line no-param-reassign
         resetList.forEach((resetTarget) => {resetTarget.value = ''});
     }
     
     machineCoinChargeButtonHandler(){
         this.getButtons().$chargeCoinButton.onclick = () => {
-            console.log(this.getInputs().$chargeCoinInput.value)
+            const {$chargeCoinInput} = this.getInputs();
+            this.vendingMachine.addMachineCoinRandomly($chargeCoinInput.value);
         }
     }
     

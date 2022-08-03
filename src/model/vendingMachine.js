@@ -1,5 +1,6 @@
 import {Product} from "./product.js";
 import {COINS} from "../constants/constants.js";
+import {pickRandomNumInList} from "../utils/utils.js";
 
 export class VendingMachine {
     constructor() {
@@ -21,7 +22,25 @@ export class VendingMachine {
         this.products.push(newProduct);
     }
     
-    // addMachineCoin(balance){
-    //    
-    // }
+    addMachineCoinRandomly(balance){
+        let remainBalance = balance;
+        remainBalance = this.repeatAddRandomCoin(remainBalance, COINS.COIN_500, [10,50,100,500]);
+        remainBalance = this.repeatAddRandomCoin(remainBalance, COINS.COIN_100, [10,50,100]);
+        remainBalance = this.repeatAddRandomCoin(remainBalance, COINS.COIN_50, [10,50]);
+        this.repeatAddRandomCoin(remainBalance, COINS.COIN_10, [10]);
+    }
+    
+    repeatAddRandomCoin(remainBalance, coinValue, coinArray){
+        while (remainBalance >= coinValue){
+            const randomCoinValue = pickRandomNumInList(coinArray);
+            this.addMachineCoin(randomCoinValue);
+            remainBalance -= randomCoinValue;
+        }
+        return remainBalance;
+    }
+    
+    addMachineCoin(coinValue){
+        const coinIndex = this.machineCoins.findIndex(coin=>coin.value === coinValue);
+        this.machineCoins[coinIndex].quantity += 1;
+    }
 }
