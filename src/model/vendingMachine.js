@@ -45,6 +45,6 @@ export class VendingMachine {
     }
     
     chargeUserBalance(balance){
-        console.log(balance);
+        this.userBalance += Number(balance);
     }
 }
