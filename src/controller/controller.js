@@ -51,10 +51,16 @@ export class Controller {
     }
     
     machineCoinChargeButtonHandler(){
+        const {$machineCoin500Quantity, $machineCoin100Quantity, $machineCoin50Quantity, $machineCoin10Quantity} = this.getMachineCoinQuantityNodes();
+        const {$chargeCoinInput} = this.getInputs();
         this.getButtons().$chargeCoinButton.onclick = () => {
-            const {$chargeCoinInput} = this.getInputs();
             this.vendingMachine.addMachineCoinRandomly($chargeCoinInput.value);
+            this.view.renderMachineCoins($machineCoin500Quantity,this.vendingMachine.machineCoins[0].quantity);
+            this.view.renderMachineCoins($machineCoin100Quantity,this.vendingMachine.machineCoins[1].quantity);
+            this.view.renderMachineCoins($machineCoin50Quantity,this.vendingMachine.machineCoins[2].quantity);
+            this.view.renderMachineCoins($machineCoin10Quantity,this.vendingMachine.machineCoins[3].quantity);
         }
+        $chargeCoinInput.value = '';
     }
     
     getButtons() {
@@ -73,6 +79,15 @@ export class Controller {
             $productPriceInput: document.querySelector(SELECTOR.PRODUCT_PRICE_INPUT),
             $productQuantityInput: document.querySelector(SELECTOR.PRODUCT_QUANTITY_INPUT),
             $chargeCoinInput: document.querySelector(SELECTOR.COIN_CHARGE_INPUT),
+        }
+    }
+
+    getMachineCoinQuantityNodes(){
+        return{
+            $machineCoin500Quantity: document.querySelector(SELECTOR.COIN_500),
+            $machineCoin100Quantity: document.querySelector(SELECTOR.COIN_100),
+            $machineCoin50Quantity: document.querySelector(SELECTOR.COIN_50),
+            $machineCoin10Quantity: document.querySelector(SELECTOR.COIN_10),
         }
     }
 }

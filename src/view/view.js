@@ -76,4 +76,8 @@ export class View {
         const nodeList = document.querySelectorAll(`.${className}`);
         nodeList.forEach((node)=>{node.remove()})
     }
+    
+    renderMachineCoins(target,quantity){
+        target.innerText = quantity;
+    }
 }

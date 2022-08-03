@@ -103,3 +103,7 @@ export const PRODUCT_LIST = (name, price, quantity) => `
         <td class="product-manage-price">${price}</td>
         <td class="product-manage-quantity">${quantity}</td>
 `;
+
+export const MACHINE_COIN = (quantity) => `
+<td class="product-manage-name">${quantity}</td>
+`;
