@@ -5,7 +5,7 @@ import {
 } from "../constants/templets.js";
 import {SELECTOR} from "../constants/constants.js";
 
-export class Index {
+export class View {
     constructor() {
         this.$app = document.querySelector("#app");
         this.tabs = {
@@ -62,7 +62,7 @@ export class Index {
         this.tabs.$productPurchaseTab.style.display = 'block';
     }
 
-    showProductList(productList) {
+    renderProductList(productList) {
         document.querySelector(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_MANAGE_ITEM);
         productList.map((product) => {
             const $productList = document.createElement('tr');

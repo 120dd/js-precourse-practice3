@@ -19,3 +19,10 @@ export const SELECTOR = {
     PURCHASE_ITEM_QUANTITY: ".product-purchase-quantity",
     PRODUCT_MANAGE_ITEM:'product-manage-item',
 };
+
+export const COINS = {
+    COIN_500:500,
+    COIN_100:500,
+    COIN_50:500,
+    COIN_10:500,
+}
