@@ -16,6 +16,7 @@ export class Controller {
         this.addProductButtonHandler();
         this.machineCoinChargeButtonHandler();
         this.chargeUserBalanceButtonHandler();
+        this.coinReturnButtonHandler();
     }
 
     productManageTabButtonHandler() {
@@ -89,6 +90,13 @@ export class Controller {
         }
     }
 
+    coinReturnButtonHandler(){
+        const {$coinReturnButton} = this.getButtons();
+        $coinReturnButton.onclick = () => {
+            console.log(1122);
+        }
+    }
+
     getButtons() {
         return {
             $productManageTabButton: document.querySelector(SELECTOR.PRODUCT_MENU),
@@ -97,6 +105,7 @@ export class Controller {
             $productAddButton: document.querySelector(SELECTOR.PRODUCT_ADD_BUTTON),
             $chargeCoinButton: document.querySelector(SELECTOR.COIN_CHARGE_BUTTON),
             $chargeUserBalance: document.querySelector(SELECTOR.PURCHASE_CHARGE_BUTTON),
+            $coinReturnButton: document.querySelector(SELECTOR.COIN_RETURN_BUTTON),
         }
     }
 
