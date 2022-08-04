@@ -65,7 +65,7 @@ export const PRODUCT_PURCHASE_TAB = `
 <table id="purchaseMenuTable" border="1">
 <tr>
     <th>상품명</th>
-    <th>개수</th>
+    <th>가격</th>
     <th>수량</th>
     <th>구매</th>
 </tr>

@@ -15,7 +15,7 @@ export class Controller {
         this.productPurchaseButtonTabHandler();
         this.addProductButtonHandler();
         this.machineCoinChargeButtonHandler();
-        this.chargeUserBalanceButton();
+        this.chargeUserBalanceButtonHandler();
     }
 
     productManageTabButtonHandler() {
@@ -44,7 +44,20 @@ export class Controller {
             this.view.renderProductList(this.vendingMachine.products);
             this.view.renderPurcharseList(this.vendingMachine.products);
             this.resetListValue([$productNameInput, $productPriceInput, $productQuantityInput]);
+            this.addPurchaseButtonHandler();
         }
+    }
+
+    addPurchaseButtonHandler(){
+        const buttonList = document.querySelectorAll(SELECTOR.PURCHASE_ITEM_BUTTON);
+        buttonList.forEach((button,inx) => {
+            button.onclick = () => {
+                this.vendingMachine.purchaseProduct(inx);
+                this.view.renderPurcharseList(this.vendingMachine.products);
+                this.addPurchaseButtonHandler();
+                this.view.renderUserBalance(this.vendingMachine.userBalance);
+            }
+        })
     }
 
     resetListValue(resetList) {
@@ -67,11 +80,12 @@ export class Controller {
         }
     }
 
-    chargeUserBalanceButton() {
+    chargeUserBalanceButtonHandler() {
         this.getButtons().$chargeUserBalance.onclick = () => {
             const balanceInput = this.getInputs().$chargeUserBalanceInput;
             this.vendingMachine.chargeUserBalance(balanceInput.value);
             this.view.renderUserBalance(this.vendingMachine.userBalance);
+            balanceInput.value = '';
         }
     }
 

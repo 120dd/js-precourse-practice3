@@ -67,31 +67,33 @@ export class View {
         document.querySelector(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_MANAGE_ITEM);
         productList.map((product) => {
             const $productList = document.createElement('tr');
-            $productList.setAttribute("class",SELECTOR.PRODUCT_MANAGE_ITEM);
-            $productList.innerHTML = PRODUCT_LIST(product.name,product.price,product.quantity);
+            $productList.setAttribute("class", SELECTOR.PRODUCT_MANAGE_ITEM);
+            $productList.innerHTML = PRODUCT_LIST(product.name, product.price, product.quantity);
             document.querySelector('#added-product-table').appendChild($productList);
         });
     }
-    
-    removeProductList(className){
+
+    removeProductList(className) {
         const nodeList = document.querySelectorAll(`.${className}`);
-        nodeList.forEach((node)=>{node.remove()})
+        nodeList.forEach((node) => {
+            node.remove()
+        })
     }
-    
-    renderMachineCoins(target,quantity){
+
+    renderMachineCoins(target, quantity) {
         target.innerText = quantity;
     }
 
     renderUserBalance(amount) {
         document.querySelector(SELECTOR.PURCHASE_CHARGE_AMOUNT).innerHTML = CHARGED_BALANCE(amount);
     }
-    
-    renderPurcharseList(productList){
+
+    renderPurcharseList(productList) {
         document.querySelector(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList('product-purchase-item');
         productList && productList.map((product) => {
             const $product = document.createElement('tr');
-            $product.setAttribute('class','product-purchase-item');
-            $product.innerHTML = PURCHASE_PRODUCT_LIST(product.name,product.price,product.quantity);
+            $product.setAttribute('class', 'product-purchase-item');
+            $product.innerHTML = PURCHASE_PRODUCT_LIST(product.name, product.price, product.quantity);
             document.querySelector('#purchaseMenuTable').appendChild($product);
         });
     }

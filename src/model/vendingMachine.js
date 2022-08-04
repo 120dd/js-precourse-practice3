@@ -5,8 +5,8 @@ import {pickRandomNumInList} from "../utils/utils.js";
 export class VendingMachine {
     constructor() {
         this.products = [
-            new Product('콜라',1200, 40),
-            new Product('사이다',800, 22),
+            new Product('콜라',40, 1200),
+            new Product('사이다',22, 800),
         ];
         this.machineCoins = [
             {value:COINS.COIN_500, quantity:0},
@@ -18,7 +18,7 @@ export class VendingMachine {
     }
 
     addProduct(name, price, quantity){
-        const newProduct = new Product(name,price, quantity);
+        const newProduct = new Product(name,quantity, price);
         this.products.push(newProduct);
     }
     
@@ -46,5 +46,11 @@ export class VendingMachine {
     
     chargeUserBalance(balance){
         this.userBalance += Number(balance);
+    }
+
+    purchaseProduct(index){
+        this.products[index].quantity -= 1;
+        this.userBalance -= this.products[index].price;
+        console.log(this);
     }
 }
