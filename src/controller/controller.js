@@ -98,12 +98,15 @@ export class Controller {
             this.vendingMachine.returnChargeCoins();
             this.view.renderUserBalance(this.vendingMachine.userBalance);
             this.renderMachineCoins();
-            console.log(this.vendingMachine.returnCoins);
-            this.view.renderCoin(this.getNodes().$return500Quantity,this.vendingMachine.returnCoins[0].quantity)
-            this.view.renderCoin(this.getNodes().$return100Quantity,this.vendingMachine.returnCoins[1].quantity)
-            this.view.renderCoin(this.getNodes().$return50Quantity,this.vendingMachine.returnCoins[2].quantity)
-            this.view.renderCoin(this.getNodes().$return10Quantity,this.vendingMachine.returnCoins[3].quantity)
+            this.renderReturnCoins()
         }
+    }
+    
+    renderReturnCoins(){
+        this.view.renderCoin(this.getNodes().$return500Quantity,this.vendingMachine.returnCoins[0].quantity)
+        this.view.renderCoin(this.getNodes().$return100Quantity,this.vendingMachine.returnCoins[1].quantity)
+        this.view.renderCoin(this.getNodes().$return50Quantity,this.vendingMachine.returnCoins[2].quantity)
+        this.view.renderCoin(this.getNodes().$return10Quantity,this.vendingMachine.returnCoins[3].quantity)
     }
 
     getButtons() {
