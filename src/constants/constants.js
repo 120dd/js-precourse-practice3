@@ -19,6 +19,10 @@ export const SELECTOR = {
     PURCHASE_ITEM_QUANTITY: ".product-purchase-quantity",
     PRODUCT_MANAGE_ITEM:'product-manage-item',
     COIN_RETURN_BUTTON:'#coin-return-button',
+    RETURN_COIN_500:'#coin-500-quantity',
+    RETURN_COIN_100:'#coin-100-quantity',
+    RETURN_COIN_50:'#coin-50-quantity',
+    RETURN_COIN_10:'#coin-10-quantity',
 };
 
 export const COINS = {

@@ -80,7 +80,7 @@ export class View {
         })
     }
 
-    renderMachineCoins(target, quantity) {
+    renderCoin(target, quantity) {
         target.innerText = quantity;
     }
 

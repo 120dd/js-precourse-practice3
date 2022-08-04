@@ -61,7 +61,7 @@ export class VendingMachine {
 
     returnChargeCoins() {
         this.returnCoins.map((coin, idx) => {
-            if (this.userBalance > coin.value) {
+            if (this.userBalance >= coin.value) {
                 const expectQuantity = Math.floor(this.userBalance / coin.value);
                 const hasQuantity = this.machineCoins[idx].quantity;
                 coin.quantity += Math.min(expectQuantity, hasQuantity);
@@ -71,7 +71,6 @@ export class VendingMachine {
         this.machineCoins.map((currentCoin, idx) => {
             currentCoin.quantity -= this.returnCoins[idx].quantity;
         })
-        console.log(this);
     }
     
 }

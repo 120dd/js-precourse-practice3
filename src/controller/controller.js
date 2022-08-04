@@ -49,9 +49,9 @@ export class Controller {
         }
     }
 
-    addPurchaseButtonHandler(){
+    addPurchaseButtonHandler() {
         const buttonList = document.querySelectorAll(SELECTOR.PURCHASE_ITEM_BUTTON);
-        buttonList.forEach((button,inx) => {
+        buttonList.forEach((button, inx) => {
             button.onclick = () => {
                 this.vendingMachine.purchaseProduct(inx);
                 this.view.renderPurcharseList(this.vendingMachine.products);
@@ -62,7 +62,6 @@ export class Controller {
     }
 
     resetListValue(resetList) {
-        // eslint-disable-next-line no-param-reassign
         resetList.forEach((resetTarget) => {
             resetTarget.value = ''
         });
@@ -76,13 +75,13 @@ export class Controller {
             $chargeCoinInput.value = '';
         }
     }
-    
-    renderMachineCoins(){
+
+    renderMachineCoins() {
         const {$machine500Quantity, $machine100Quantity, $machine50Quantity, $machine10Quantity} = this.getNodes();
-        this.view.renderMachineCoins($machine500Quantity, this.vendingMachine.machineCoins[0].quantity);
-        this.view.renderMachineCoins($machine100Quantity, this.vendingMachine.machineCoins[1].quantity);
-        this.view.renderMachineCoins($machine50Quantity, this.vendingMachine.machineCoins[2].quantity);
-        this.view.renderMachineCoins($machine10Quantity, this.vendingMachine.machineCoins[3].quantity);
+        const coinQuantityNodes = [$machine500Quantity, $machine100Quantity, $machine50Quantity, $machine10Quantity];
+        coinQuantityNodes.map((node, inx) => {
+            this.view.renderCoin(node, this.vendingMachine.machineCoins[inx].quantity);
+        })
     }
 
     chargeUserBalanceButtonHandler() {
@@ -94,11 +93,16 @@ export class Controller {
         }
     }
 
-    coinReturnButtonHandler(){
+    coinReturnButtonHandler() {
         this.getButtons().$coinReturnButton.onclick = () => {
             this.vendingMachine.returnChargeCoins();
             this.view.renderUserBalance(this.vendingMachine.userBalance);
             this.renderMachineCoins();
+            console.log(this.vendingMachine.returnCoins);
+            this.view.renderCoin(this.getNodes().$return500Quantity,this.vendingMachine.returnCoins[0].quantity)
+            this.view.renderCoin(this.getNodes().$return100Quantity,this.vendingMachine.returnCoins[1].quantity)
+            this.view.renderCoin(this.getNodes().$return50Quantity,this.vendingMachine.returnCoins[2].quantity)
+            this.view.renderCoin(this.getNodes().$return10Quantity,this.vendingMachine.returnCoins[3].quantity)
         }
     }
 
@@ -130,6 +134,10 @@ export class Controller {
             $machine100Quantity: document.querySelector(SELECTOR.COIN_100),
             $machine50Quantity: document.querySelector(SELECTOR.COIN_50),
             $machine10Quantity: document.querySelector(SELECTOR.COIN_10),
+            $return500Quantity: document.querySelector(SELECTOR.RETURN_COIN_500),
+            $return100Quantity: document.querySelector(SELECTOR.RETURN_COIN_100),
+            $return50Quantity: document.querySelector(SELECTOR.RETURN_COIN_50),
+            $return10Quantity: document.querySelector(SELECTOR.RETURN_COIN_10),
         }
     }
 }
