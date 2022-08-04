@@ -69,16 +69,20 @@ export class Controller {
     }
 
     machineCoinChargeButtonHandler() {
-        const {$machine500Quantity, $machine100Quantity, $machine50Quantity, $machine10Quantity} = this.getNodes();
         const {$chargeCoinInput} = this.getInputs();
         this.getButtons().$chargeCoinButton.onclick = () => {
             this.vendingMachine.addMachineCoinRandomly($chargeCoinInput.value);
-            this.view.renderMachineCoins($machine500Quantity, this.vendingMachine.machineCoins[0].quantity);
-            this.view.renderMachineCoins($machine100Quantity, this.vendingMachine.machineCoins[1].quantity);
-            this.view.renderMachineCoins($machine50Quantity, this.vendingMachine.machineCoins[2].quantity);
-            this.view.renderMachineCoins($machine10Quantity, this.vendingMachine.machineCoins[3].quantity);
+            this.renderMachineCoins();
             $chargeCoinInput.value = '';
         }
+    }
+    
+    renderMachineCoins(){
+        const {$machine500Quantity, $machine100Quantity, $machine50Quantity, $machine10Quantity} = this.getNodes();
+        this.view.renderMachineCoins($machine500Quantity, this.vendingMachine.machineCoins[0].quantity);
+        this.view.renderMachineCoins($machine100Quantity, this.vendingMachine.machineCoins[1].quantity);
+        this.view.renderMachineCoins($machine50Quantity, this.vendingMachine.machineCoins[2].quantity);
+        this.view.renderMachineCoins($machine10Quantity, this.vendingMachine.machineCoins[3].quantity);
     }
 
     chargeUserBalanceButtonHandler() {
@@ -91,9 +95,10 @@ export class Controller {
     }
 
     coinReturnButtonHandler(){
-        const {$coinReturnButton} = this.getButtons();
-        $coinReturnButton.onclick = () => {
-            console.log(1122);
+        this.getButtons().$coinReturnButton.onclick = () => {
+            this.vendingMachine.returnChargeCoins();
+            this.view.renderUserBalance(this.vendingMachine.userBalance);
+            this.renderMachineCoins();
         }
     }
 
