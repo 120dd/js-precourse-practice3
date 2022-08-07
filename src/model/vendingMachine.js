@@ -99,4 +99,12 @@ export class VendingMachine {
         localStorage.setItem('userBalance', this.userBalance);
     }
 
+    resetRetrunCoins(){
+        this.returnCoins = [
+            {value: COINS.COIN_500, quantity: 0},
+            {value: COINS.COIN_100, quantity: 0},
+            {value: COINS.COIN_50, quantity: 0},
+            {value: COINS.COIN_10, quantity: 0},
+        ];
+    }
 }

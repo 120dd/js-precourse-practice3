@@ -125,6 +125,7 @@ export class Controller {
             this.view.renderUserBalance(this.vendingMachine.userBalance);
             this.renderMachineCoins();
             this.renderReturnCoins();
+            this.vendingMachine.resetRetrunCoins();
         }
     }
 
