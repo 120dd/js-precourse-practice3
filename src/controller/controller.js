@@ -2,7 +2,12 @@ import {$} from '../view/DOMs.js';
 import {VendingMachine} from "../model/vendingMachine.js";
 import {View} from "../view/view.js";
 import {SELECTOR} from "../constants/constants.js";
-import {verifyProductNameInput, verifyProductPriceInput, verifyProductQuantityInput} from "../utils/verifier.js";
+import {
+    verifyChargeCoin,
+    verifyProductNameInput,
+    verifyProductPriceInput,
+    verifyProductQuantityInput
+} from "../utils/verifier.js";
 
 export class Controller {
     constructor() {
@@ -45,7 +50,6 @@ export class Controller {
             if (!verifyProductNameInput($(SELECTOR.PRODUCT_NAME_INPUT)) || !verifyProductPriceInput($(SELECTOR.PRODUCT_PRICE_INPUT)) || !verifyProductQuantityInput($(SELECTOR.PRODUCT_QUANTITY_INPUT))) {
                 return
             }
-            console.log(22);
             this.vendingMachine.addProduct($(SELECTOR.PRODUCT_NAME_INPUT).value, $(SELECTOR.PRODUCT_PRICE_INPUT).value, $(SELECTOR.PRODUCT_QUANTITY_INPUT).value);
             this.view.renderProductList(this.vendingMachine.products);
             this.view.renderPurchaseList(this.vendingMachine.products);
@@ -74,6 +78,9 @@ export class Controller {
 
     machineCoinChargeButtonHandler() {
         $(SELECTOR.COIN_CHARGE_BUTTON).onclick = () => {
+            if (!verifyChargeCoin($(SELECTOR.COIN_CHARGE_INPUT))) {
+                return;
+            }
             this.vendingMachine.addMachineCoinRandomly($(SELECTOR.COIN_CHARGE_INPUT).value);
             this.renderMachineCoins();
             $(SELECTOR.COIN_CHARGE_INPUT).value = '';

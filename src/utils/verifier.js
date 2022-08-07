@@ -16,7 +16,7 @@ export function verifyProductPriceInput(price) {
         return false
     }
     if (price.value % 10 !== 0){
-        alert('가격은 1원 단위는 입력 불가합니다');
+        alert('가격은 10원 단위만 가능합니다');
         return false
     }
     return true
@@ -32,4 +32,20 @@ export function verifyProductQuantityInput(quantity) {
         return false
     }
     return true
+}
+
+export function verifyChargeCoin(balanceInput) {
+    if (balanceInput.value === ''){
+        alert('금액을 입력해주세요');
+        return false
+    }
+    if (balanceInput.value < 0){
+        alert('금액은 0보다 커야합니다');
+        return false
+    }
+    if (balanceInput.value % 10 !== 0){
+        alert('금액은 10원 단위만 가능합니다');
+        return false
+    }
+    return true;
 }
