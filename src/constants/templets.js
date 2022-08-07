@@ -60,7 +60,7 @@ export const PRODUCT_PURCHASE_TAB = `
 <h3>금액 투입</h3>
 <input type="number" id="charge-input">
 <button id="charge-button">투입하기</button>
-<p id="charge-amount">투입한 금액:</p>
+<p>투입한 금액: <span id="charge-amount"></span></p>
 <h3>구매할 수 있는 상품 현황</h3>
 <table id="purchaseMenuTable" border="1">
 <tr>
@@ -103,7 +103,7 @@ export const PRODUCT_LIST = (name, price, quantity) => `
         <td class="product-manage-quantity">${quantity}</td>
 `;
 
-export const CHARGED_BALANCE = (balance) => `투입한 금액: ${balance}원`;
+export const CHARGED_BALANCE = (balance) => balance;
 
 export const PURCHASE_PRODUCT_LIST = (name, price, quantity) => `
         <td class="product-purchase-name" data-product-name=${name}>${name}</td>

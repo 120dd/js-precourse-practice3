@@ -83,7 +83,7 @@ export class View {
     }
 
     renderCoin(target, quantity) {
-        target.innerText = quantity;
+        target.innerText = `${quantity}개`;
     }
 
     renderUserBalance(amount) {

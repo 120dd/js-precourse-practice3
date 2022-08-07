@@ -6,8 +6,8 @@ import {verifyProductNameInput, verifyProductPriceInput, verifyProductQuantityIn
 export class VendingMachine {
     constructor() {
         this.products = [
-            new Product('콜라', 40, 1200),
-            new Product('사이다', 22, 800),
+            // new Product('콜라', 40, 1200),
+            // new Product('사이다', 22, 800),
         ];
         this.machineCoins = [
             {value: COINS.COIN_500, quantity: 0},
