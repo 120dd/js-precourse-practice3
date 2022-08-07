@@ -1,6 +1,6 @@
 export const COMMON_HTML = `
 <h1>
-    Machine
+    자판기
 </h1>
 <div class="tab-buttons">
     <button id = "product-add-menu">상품 관리</button>
