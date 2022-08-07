@@ -1,3 +1,5 @@
+import {$} from './DOMs.js';
+
 import {
     CHARGE_COIN_TAB, CHARGED_BALANCE,
     COMMON_HTML, PRODUCT_LIST,
@@ -7,7 +9,7 @@ import {SELECTOR} from "../constants/constants.js";
 
 export class View {
     constructor() {
-        this.$app = document.querySelector("#app");
+        this.$app = $("#app");
         this.tabs = {
             $productManageTab: document.createElement("div"),
             $chargeCoinTab: document.createElement("div"),
@@ -21,7 +23,7 @@ export class View {
         this.renderProductManageTab();
         this.renderChargeCoinTab();
         this.renderProductPurchaseTab();
-        this.renderPurcharseList();
+        this.renderPurchaseList();
     }
 
     renderCommon() {
@@ -64,12 +66,12 @@ export class View {
     }
 
     renderProductList(productList) {
-        document.querySelector(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_MANAGE_ITEM);
+        $(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_MANAGE_ITEM);
         productList.map((product) => {
             const $productList = document.createElement('tr');
             $productList.setAttribute("class", SELECTOR.PRODUCT_MANAGE_ITEM);
             $productList.innerHTML = PRODUCT_LIST(product.name, product.price, product.quantity);
-            document.querySelector('#added-product-table').appendChild($productList);
+            $('#added-product-table').appendChild($productList);
         });
     }
 
@@ -85,16 +87,16 @@ export class View {
     }
 
     renderUserBalance(amount) {
-        document.querySelector(SELECTOR.PURCHASE_CHARGE_AMOUNT).innerHTML = CHARGED_BALANCE(amount);
+        $(SELECTOR.PURCHASE_CHARGE_AMOUNT).innerHTML = CHARGED_BALANCE(amount);
     }
 
-    renderPurcharseList(productList) {
-        document.querySelector(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList('product-purchase-item');
+    renderPurchaseList(productList) {
+        $(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_PURCHASE_ITEM);
         productList && productList.map((product) => {
             const $product = document.createElement('tr');
-            $product.setAttribute('class', 'product-purchase-item');
+            $product.setAttribute('class', SELECTOR.PRODUCT_PURCHASE_ITEM);
             $product.innerHTML = PURCHASE_PRODUCT_LIST(product.name, product.price, product.quantity);
-            document.querySelector('#purchaseMenuTable').appendChild($product);
+            $('#purchaseMenuTable').appendChild($product);
         });
     }
 }

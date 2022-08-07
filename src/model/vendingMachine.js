@@ -1,6 +1,7 @@
 import {Product} from "./product.js";
 import {COINS} from "../constants/constants.js";
 import {pickRandomNumInList} from "../utils/utils.js";
+import {verifyProductNameInput, verifyProductPriceInput, verifyProductQuantityInput} from "../utils/verifier.js";
 
 export class VendingMachine {
     constructor() {
@@ -24,6 +25,15 @@ export class VendingMachine {
     }
 
     addProduct(name, price, quantity) {
+        // if (verifyProductNameInput(name)){
+        //     return
+        // }
+        // if (verifyProductPriceInput(price)){
+        //     return
+        // }
+        // if (verifyProductQuantityInput(quantity)){
+        //     return
+        // }
         const newProduct = new Product(name, quantity, price);
         this.products.push(newProduct);
     }
