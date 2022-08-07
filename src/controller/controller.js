@@ -6,7 +6,7 @@ import {
     verifyBalance,
     verifyProductNameInput,
     verifyProductPriceInput,
-    verifyProductQuantityInput
+    verifyProductQuantityInput, verityEnoughBalance
 } from "../utils/verifier.js";
 
 export class Controller {
@@ -62,6 +62,9 @@ export class Controller {
         const buttonList = document.querySelectorAll(SELECTOR.PURCHASE_ITEM_BUTTON);
         buttonList.forEach((button, inx) => {
             button.onclick = () => {
+                if (!verityEnoughBalance(this.vendingMachine.userBalance, this.vendingMachine.products[inx].price)) {
+                    return
+                }
                 this.vendingMachine.purchaseProduct(inx);
                 this.view.renderPurchaseList(this.vendingMachine.products);
                 this.addPurchaseButtonHandler();
