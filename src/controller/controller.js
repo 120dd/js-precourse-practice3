@@ -66,6 +66,7 @@ export class Controller {
                     return
                 }
                 this.vendingMachine.purchaseProduct(inx);
+                this.view.renderProductList(this.vendingMachine.products);
                 this.view.renderPurchaseList(this.vendingMachine.products);
                 this.addPurchaseButtonHandler();
                 this.view.renderUserBalance(this.vendingMachine.userBalance);
