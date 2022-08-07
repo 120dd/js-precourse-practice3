@@ -2,12 +2,13 @@ import {$} from '../view/DOMs.js';
 import {VendingMachine} from "../model/vendingMachine.js";
 import {View} from "../view/view.js";
 import {SELECTOR} from "../constants/constants.js";
+import {verifyProductNameInput, verifyProductPriceInput, verifyProductQuantityInput} from "../utils/verifier.js";
 
 export class Controller {
     constructor() {
         this.init();
     }
-    
+
     init() {
         this.view = new View();
         this.vendingMachine = new VendingMachine();
@@ -21,7 +22,7 @@ export class Controller {
     }
 
     productManageTabButtonHandler() {
-    $(SELECTOR.PRODUCT_MENU).onclick = () => {
+        $(SELECTOR.PRODUCT_MENU).onclick = () => {
             this.view.showProductManageTab();
         }
     }
@@ -41,6 +42,10 @@ export class Controller {
     addProductButtonHandler() {
         $(SELECTOR.PRODUCT_ADD_BUTTON).onclick = (e) => {
             e.preventDefault();
+            if (!verifyProductNameInput($(SELECTOR.PRODUCT_NAME_INPUT)) || !verifyProductPriceInput($(SELECTOR.PRODUCT_PRICE_INPUT)) || !verifyProductQuantityInput($(SELECTOR.PRODUCT_QUANTITY_INPUT))) {
+                return
+            }
+            console.log(22);
             this.vendingMachine.addProduct($(SELECTOR.PRODUCT_NAME_INPUT).value, $(SELECTOR.PRODUCT_PRICE_INPUT).value, $(SELECTOR.PRODUCT_QUANTITY_INPUT).value);
             this.view.renderProductList(this.vendingMachine.products);
             this.view.renderPurchaseList(this.vendingMachine.products);
@@ -99,11 +104,11 @@ export class Controller {
             this.renderReturnCoins()
         }
     }
-    
-    renderReturnCoins(){
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_500),this.vendingMachine.returnCoins[0].quantity)
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_100),this.vendingMachine.returnCoins[1].quantity)
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_50),this.vendingMachine.returnCoins[2].quantity)
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_10),this.vendingMachine.returnCoins[3].quantity)
+
+    renderReturnCoins() {
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_500), this.vendingMachine.returnCoins[0].quantity)
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_100), this.vendingMachine.returnCoins[1].quantity)
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_50), this.vendingMachine.returnCoins[2].quantity)
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_10), this.vendingMachine.returnCoins[3].quantity)
     }
 }

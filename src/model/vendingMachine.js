@@ -25,15 +25,6 @@ export class VendingMachine {
     }
 
     addProduct(name, price, quantity) {
-        // if (verifyProductNameInput(name)){
-        //     return
-        // }
-        // if (verifyProductPriceInput(price)){
-        //     return
-        // }
-        // if (verifyProductQuantityInput(quantity)){
-        //     return
-        // }
         const newProduct = new Product(name, quantity, price);
         this.products.push(newProduct);
     }

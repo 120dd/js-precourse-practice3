@@ -1,5 +1,5 @@
 export function verifyProductNameInput(name) {
-    if (name === ''){
+    if (name.value === ''){
         alert('상품명을 입력해주세요');
         return false
     }
