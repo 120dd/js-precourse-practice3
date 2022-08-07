@@ -1,14 +1,10 @@
 import {Product} from "./product.js";
 import {COINS} from "../constants/constants.js";
 import {pickRandomNumInList} from "../utils/utils.js";
-import {verifyProductNameInput, verifyProductPriceInput, verifyProductQuantityInput} from "../utils/verifier.js";
 
 export class VendingMachine {
     constructor() {
-        this.products = [
-            // new Product('콜라', 40, 1200),
-            // new Product('사이다', 22, 800),
-        ];
+        this.products = [];
         this.machineCoins = [
             {value: COINS.COIN_500, quantity: 0},
             {value: COINS.COIN_100, quantity: 0},
@@ -22,11 +18,36 @@ export class VendingMachine {
             {value: COINS.COIN_10, quantity: 0},
         ];
         this.userBalance = 0;
+        this.productInit();
+        this.coinInit();
+        this.balanceInit();
+    }
+
+    productInit() {
+        const productDatas = JSON.parse(localStorage.getItem('productList'));
+        if (productDatas) {
+            productDatas.forEach(productData => {
+                this.products.push(new Product(productData.name, Number(productData.quantity), Number(productData.price)))
+            })
+        }
+    }
+
+    coinInit() {
+        if (JSON.parse(localStorage.getItem('machineCoin'))) {
+            this.machineCoins = JSON.parse(localStorage.getItem('machineCoin'));
+        }
+    }
+
+    balanceInit() {
+        if (JSON.parse(localStorage.getItem('userBalance'))) {
+            this.userBalance = JSON.parse(localStorage.getItem('userBalance'));
+        }
     }
 
     addProduct(name, price, quantity) {
         const newProduct = new Product(name, quantity, price);
         this.products.push(newProduct);
+        localStorage.setItem('productList', JSON.stringify(this.products));
     }
 
     addMachineCoinRandomly(balance) {
@@ -49,15 +70,18 @@ export class VendingMachine {
     addMachineCoin(coinValue) {
         const coinIndex = this.machineCoins.findIndex(coin => coin.value === coinValue);
         this.machineCoins[coinIndex].quantity += 1;
+        localStorage.setItem('machineCoin', JSON.stringify(this.machineCoins));
     }
 
     chargeUserBalance(balance) {
         this.userBalance += Number(balance);
+        localStorage.setItem('userBalance', this.userBalance);
     }
 
     purchaseProduct(index) {
         this.products[index].quantity -= 1;
         this.userBalance -= this.products[index].price;
+        localStorage.setItem('productList', JSON.stringify(this.products));
     }
 
     returnChargeCoins() {
@@ -72,6 +96,7 @@ export class VendingMachine {
         this.machineCoins.map((currentCoin, idx) => {
             currentCoin.quantity -= this.returnCoins[idx].quantity;
         })
+        localStorage.setItem('userBalance', this.userBalance);
     }
-    
+
 }

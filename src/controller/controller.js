@@ -17,6 +17,7 @@ export class Controller {
     init() {
         this.view = new View();
         this.vendingMachine = new VendingMachine();
+        this.renderInit();
         this.productManageTabButtonHandler();
         this.chargeCoinButtonTabHandler();
         this.productPurchaseButtonTabHandler();
@@ -24,6 +25,14 @@ export class Controller {
         this.machineCoinChargeButtonHandler();
         this.chargeUserBalanceButtonHandler();
         this.coinReturnButtonHandler();
+    }
+
+    renderInit() {
+        this.view.renderProductList(this.vendingMachine.products);
+        this.view.renderPurchaseList(this.vendingMachine.products);
+        this.renderMachineCoins();
+        this.view.renderUserBalance(this.vendingMachine.userBalance);
+        this.addPurchaseButtonHandler();
     }
 
     productManageTabButtonHandler() {
@@ -115,7 +124,7 @@ export class Controller {
             this.vendingMachine.returnChargeCoins();
             this.view.renderUserBalance(this.vendingMachine.userBalance);
             this.renderMachineCoins();
-            this.renderReturnCoins()
+            this.renderReturnCoins();
         }
     }
 
