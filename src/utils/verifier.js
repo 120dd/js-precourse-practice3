@@ -34,7 +34,7 @@ export function verifyProductQuantityInput(quantity) {
     return true
 }
 
-export function verifyChargeCoin(balanceInput) {
+export function verifyBalance(balanceInput) {
     if (balanceInput.value === ''){
         alert('금액을 입력해주세요');
         return false

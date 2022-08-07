@@ -3,7 +3,7 @@ import {VendingMachine} from "../model/vendingMachine.js";
 import {View} from "../view/view.js";
 import {SELECTOR} from "../constants/constants.js";
 import {
-    verifyChargeCoin,
+    verifyBalance,
     verifyProductNameInput,
     verifyProductPriceInput,
     verifyProductQuantityInput
@@ -78,7 +78,7 @@ export class Controller {
 
     machineCoinChargeButtonHandler() {
         $(SELECTOR.COIN_CHARGE_BUTTON).onclick = () => {
-            if (!verifyChargeCoin($(SELECTOR.COIN_CHARGE_INPUT))) {
+            if (!verifyBalance($(SELECTOR.COIN_CHARGE_INPUT))) {
                 return;
             }
             this.vendingMachine.addMachineCoinRandomly($(SELECTOR.COIN_CHARGE_INPUT).value);
@@ -97,6 +97,9 @@ export class Controller {
     chargeUserBalanceButtonHandler() {
         $(SELECTOR.PURCHASE_CHARGE_BUTTON).onclick = () => {
             const balanceInput = $(SELECTOR.PURCHASE_CHARGE_INPUT);
+            if (!verifyBalance(balanceInput)) {
+                return;
+            }
             this.vendingMachine.chargeUserBalance(balanceInput.value);
             this.view.renderUserBalance(this.vendingMachine.userBalance);
             balanceInput.value = '';
