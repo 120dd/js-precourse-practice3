@@ -82,7 +82,23 @@ export class View {
     }
 
     renderCoin(target, quantity) {
-        target.innerText = `${quantity}개`;
+        const newCoin = target.cloneNode(true);
+        newCoin.innerText = `${quantity}개`;
+        target.replaceWith(newCoin);
+    }
+
+    renderMachineCoins(vendingMachine) {
+        const coinQuantityNodes = [$(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50), $(SELECTOR.COIN_10)];
+        coinQuantityNodes.map((node, inx) => {
+            this.renderCoin(node, vendingMachine.machineCoins[inx].quantity);
+        })
+    }
+
+    renderReturnCoins(vendingMachine) {
+        this.renderCoin($(SELECTOR.RETURN_COIN_500), vendingMachine.returnCoins[0].quantity);
+        this.renderCoin($(SELECTOR.RETURN_COIN_100), vendingMachine.returnCoins[1].quantity);
+        this.renderCoin($(SELECTOR.RETURN_COIN_50), vendingMachine.returnCoins[2].quantity);
+        this.renderCoin($(SELECTOR.RETURN_COIN_10), vendingMachine.returnCoins[3].quantity);
     }
 
     renderUserBalance(amount) {

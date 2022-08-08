@@ -30,7 +30,7 @@ export class Controller {
     initRender() {
         this.view.renderProductList(this.vendingMachine.products);
         this.view.renderPurchaseList(this.vendingMachine.products);
-        this.renderMachineCoins();
+        this.view.renderMachineCoins(this.vendingMachine);
         this.view.renderUserBalance(this.vendingMachine.userBalance);
         this.addPurchaseButtonHandler();
     }
@@ -89,16 +89,9 @@ export class Controller {
                 return;
             }
             this.vendingMachine.addMachineCoinRandomly($(SELECTOR.COIN_CHARGE_INPUT).value);
-            this.renderMachineCoins();
+            this.view.renderMachineCoins(this.vendingMachine);
             $(SELECTOR.COIN_CHARGE_INPUT).value = '';
         }
-    }
-
-    renderMachineCoins() {
-        const coinQuantityNodes = [$(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50), $(SELECTOR.COIN_10)];
-        coinQuantityNodes.map((node, inx) => {
-            this.view.renderCoin(node, this.vendingMachine.machineCoins[inx].quantity);
-        })
     }
 
     chargeUserBalanceButtonHandler() {
@@ -117,16 +110,9 @@ export class Controller {
         $(SELECTOR.COIN_RETURN_BUTTON).onclick = () => {
             this.vendingMachine.returnChargeCoins();
             this.view.renderUserBalance(this.vendingMachine.userBalance);
-            this.renderMachineCoins();
-            this.renderReturnCoins();
+            this.view.renderMachineCoins(this.vendingMachine);
+            this.view.renderReturnCoins(this.vendingMachine);
             this.vendingMachine.resetReturnCoins();
         }
-    }
-    
-    renderReturnCoins() {
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_500), this.vendingMachine.returnCoins[0].quantity);
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_100), this.vendingMachine.returnCoins[1].quantity);
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_50), this.vendingMachine.returnCoins[2].quantity);
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_10), this.vendingMachine.returnCoins[3].quantity);
     }
 }
