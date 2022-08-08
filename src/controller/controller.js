@@ -1,4 +1,3 @@
-import {$} from '../view/DOMs.js';
 import {VendingMachine} from "../model/vendingMachine.js";
 import {View} from "../view/view.js";
 import {SELECTOR} from "../constants/constants.js";
@@ -8,6 +7,7 @@ import {
     verifyProductPriceInput,
     verifyProductQuantityInput, verityEnoughBalance
 } from "../utils/verifier.js";
+import {$} from "../utils/utils.js";
 
 export class Controller {
     constructor() {
@@ -100,6 +100,7 @@ export class Controller {
         }
     }
 
+    // view로 이동
     renderMachineCoins() {
         const coinQuantityNodes = [$(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50), $(SELECTOR.COIN_10)];
         coinQuantityNodes.map((node, inx) => {
@@ -129,6 +130,7 @@ export class Controller {
         }
     }
 
+    // view 에 있어야함
     renderReturnCoins() {
         this.view.renderCoin($(SELECTOR.RETURN_COIN_500), this.vendingMachine.returnCoins[0].quantity)
         this.view.renderCoin($(SELECTOR.RETURN_COIN_100), this.vendingMachine.returnCoins[1].quantity)
