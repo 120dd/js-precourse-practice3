@@ -7,7 +7,7 @@ import {
     verifyProductPriceInput,
     verifyProductQuantityInput, verityEnoughBalance
 } from "../utils/verifier.js";
-import {$, resetListValue} from "../utils/utils.js";
+import {$} from "../utils/utils.js";
 
 export class Controller {
     constructor() {
@@ -62,7 +62,7 @@ export class Controller {
             this.vendingMachine.addProduct($(SELECTOR.PRODUCT_NAME_INPUT).value, $(SELECTOR.PRODUCT_PRICE_INPUT).value, $(SELECTOR.PRODUCT_QUANTITY_INPUT).value);
             this.view.renderProductList(this.vendingMachine.products);
             this.view.renderPurchaseList(this.vendingMachine.products);
-            resetListValue([$(SELECTOR.PRODUCT_PRICE_INPUT), $(SELECTOR.PRODUCT_QUANTITY_INPUT), $(SELECTOR.PRODUCT_NAME_INPUT)]);
+            this.resetListValue([$(SELECTOR.PRODUCT_PRICE_INPUT), $(SELECTOR.PRODUCT_QUANTITY_INPUT), $(SELECTOR.PRODUCT_NAME_INPUT)]);
             this.addPurchaseButtonHandler();
         }
     }
@@ -114,5 +114,11 @@ export class Controller {
             this.view.renderReturnCoins(this.vendingMachine);
             this.vendingMachine.resetReturnCoins();
         }
+    }
+    
+    resetListValue(resetList) {
+        resetList.forEach((resetTarget) => {
+            resetTarget.value = ''
+        });
     }
 }
