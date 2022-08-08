@@ -7,7 +7,7 @@ import {
     verifyProductPriceInput,
     verifyProductQuantityInput, verityEnoughBalance
 } from "../utils/verifier.js";
-import {$} from "../utils/utils.js";
+import {$, resetListValue} from "../utils/utils.js";
 
 export class Controller {
     constructor() {
@@ -17,7 +17,7 @@ export class Controller {
     init() {
         this.view = new View();
         this.vendingMachine = new VendingMachine();
-        this.renderInit();
+        this.initRender();
         this.productManageTabButtonHandler();
         this.chargeCoinButtonTabHandler();
         this.productPurchaseButtonTabHandler();
@@ -27,7 +27,7 @@ export class Controller {
         this.coinReturnButtonHandler();
     }
 
-    renderInit() {
+    initRender() {
         this.view.renderProductList(this.vendingMachine.products);
         this.view.renderPurchaseList(this.vendingMachine.products);
         this.renderMachineCoins();
@@ -62,7 +62,7 @@ export class Controller {
             this.vendingMachine.addProduct($(SELECTOR.PRODUCT_NAME_INPUT).value, $(SELECTOR.PRODUCT_PRICE_INPUT).value, $(SELECTOR.PRODUCT_QUANTITY_INPUT).value);
             this.view.renderProductList(this.vendingMachine.products);
             this.view.renderPurchaseList(this.vendingMachine.products);
-            this.resetListValue([$(SELECTOR.PRODUCT_PRICE_INPUT), $(SELECTOR.PRODUCT_QUANTITY_INPUT), $(SELECTOR.PRODUCT_NAME_INPUT)]);
+            resetListValue([$(SELECTOR.PRODUCT_PRICE_INPUT), $(SELECTOR.PRODUCT_QUANTITY_INPUT), $(SELECTOR.PRODUCT_NAME_INPUT)]);
             this.addPurchaseButtonHandler();
         }
     }
@@ -83,12 +83,6 @@ export class Controller {
         })
     }
 
-    resetListValue(resetList) {
-        resetList.forEach((resetTarget) => {
-            resetTarget.value = ''
-        });
-    }
-
     machineCoinChargeButtonHandler() {
         $(SELECTOR.COIN_CHARGE_BUTTON).onclick = () => {
             if (!verifyBalance($(SELECTOR.COIN_CHARGE_INPUT))) {
@@ -100,7 +94,6 @@ export class Controller {
         }
     }
 
-    // view로 이동
     renderMachineCoins() {
         const coinQuantityNodes = [$(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50), $(SELECTOR.COIN_10)];
         coinQuantityNodes.map((node, inx) => {
@@ -126,15 +119,14 @@ export class Controller {
             this.view.renderUserBalance(this.vendingMachine.userBalance);
             this.renderMachineCoins();
             this.renderReturnCoins();
-            this.vendingMachine.resetRetrunCoins();
+            this.vendingMachine.resetReturnCoins();
         }
     }
-
-    // view 에 있어야함
+    
     renderReturnCoins() {
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_500), this.vendingMachine.returnCoins[0].quantity)
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_100), this.vendingMachine.returnCoins[1].quantity)
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_50), this.vendingMachine.returnCoins[2].quantity)
-        this.view.renderCoin($(SELECTOR.RETURN_COIN_10), this.vendingMachine.returnCoins[3].quantity)
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_500), this.vendingMachine.returnCoins[0].quantity);
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_100), this.vendingMachine.returnCoins[1].quantity);
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_50), this.vendingMachine.returnCoins[2].quantity);
+        this.view.renderCoin($(SELECTOR.RETURN_COIN_10), this.vendingMachine.returnCoins[3].quantity);
     }
 }
