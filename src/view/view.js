@@ -1,11 +1,10 @@
-import {$} from './DOMs.js';
-
 import {
     CHARGE_COIN_TAB, CHARGED_BALANCE,
     COMMON_HTML, PRODUCT_LIST,
     PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB, PURCHASE_PRODUCT_LIST
 } from "../constants/templets.js";
 import {SELECTOR} from "../constants/constants.js";
+import {$} from "../utils/utils.js";
 
 export class View {
     constructor() {

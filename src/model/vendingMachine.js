@@ -18,12 +18,12 @@ export class VendingMachine {
             {value: COINS.COIN_10, quantity: 0},
         ];
         this.userBalance = 0;
-        this.productInit();
-        this.coinInit();
-        this.balanceInit();
+        this.initProduct();
+        this.initCoin();
+        this.initBalance();
     }
 
-    productInit() {
+    initProduct() {
         const productDatas = JSON.parse(localStorage.getItem('productList'));
         if (productDatas) {
             productDatas.forEach(productData => {
@@ -32,13 +32,13 @@ export class VendingMachine {
         }
     }
 
-    coinInit() {
+    initCoin() {
         if (JSON.parse(localStorage.getItem('machineCoin'))) {
             this.machineCoins = JSON.parse(localStorage.getItem('machineCoin'));
         }
     }
 
-    balanceInit() {
+    initBalance() {
         if (JSON.parse(localStorage.getItem('userBalance'))) {
             this.userBalance = JSON.parse(localStorage.getItem('userBalance'));
         }
@@ -99,7 +99,7 @@ export class VendingMachine {
         localStorage.setItem('userBalance', this.userBalance);
     }
 
-    resetRetrunCoins(){
+    resetReturnCoins(){
         this.returnCoins = [
             {value: COINS.COIN_500, quantity: 0},
             {value: COINS.COIN_100, quantity: 0},
