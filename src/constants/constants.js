@@ -32,3 +32,16 @@ export const COINS = {
     COIN_50:50,
     COIN_10:10,
 }
+
+export const ALERT_COMMENTS = {
+    enterName:'상품명을 입력해주세요',
+    enterPrice:'가격을 입력해주세요',
+    priceMoreThan10:'가격은 10원 보다 비싸야합니다',
+    priceShouldMultipleOf10:'가격은 10원 단위만 가능합니다',
+    enterQuantity:'수량을 입력해주세요',
+    quantityShouldMoreThan0:'수량은 0보다 커야합니다',
+    enterBalance:'금액을 입력해주세요',
+    balanceShouldMoreThan0:'금액은 0보다 커야합니다',
+    balanceShouldMultipleOf10:'금액은 10원 단위만 가능합니다',
+    notEnoughBalance:'소지금이 부족합니다!'
+}

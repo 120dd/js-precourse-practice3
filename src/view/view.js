@@ -107,11 +107,15 @@ export class View {
 
     renderPurchaseList(productList) {
         $(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_PURCHASE_ITEM);
-        productList && productList.map((product) => {
+        productList?.map((product) => {
             const $product = document.createElement('tr');
             $product.setAttribute('class', SELECTOR.PRODUCT_PURCHASE_ITEM);
             $product.innerHTML = PURCHASE_PRODUCT_LIST(product.name, product.price, product.quantity);
             $('#purchaseMenuTable').appendChild($product);
         });
+    }
+    
+    showAlert(comment){
+        alert(comment);
     }
 }

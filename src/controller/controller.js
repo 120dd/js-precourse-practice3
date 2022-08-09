@@ -56,7 +56,10 @@ export class Controller {
     addProductButtonHandler() {
         $(SELECTOR.PRODUCT_ADD_BUTTON).onclick = (e) => {
             e.preventDefault();
-            if (!verifyProductNameInput($(SELECTOR.PRODUCT_NAME_INPUT)) || !verifyProductPriceInput($(SELECTOR.PRODUCT_PRICE_INPUT)) || !verifyProductQuantityInput($(SELECTOR.PRODUCT_QUANTITY_INPUT))) {
+            const verifyResult = [verifyProductNameInput($(SELECTOR.PRODUCT_NAME_INPUT)), verifyProductPriceInput($(SELECTOR.PRODUCT_PRICE_INPUT)), verifyProductQuantityInput($(SELECTOR.PRODUCT_QUANTITY_INPUT))];
+            const errorIndex = verifyResult.findIndex((result)=>result.status === false);
+            if (errorIndex !== -1) {
+                this.view.showAlert(verifyResult[errorIndex].errorCode);
                 return
             }
             this.vendingMachine.addProduct($(SELECTOR.PRODUCT_NAME_INPUT).value, $(SELECTOR.PRODUCT_PRICE_INPUT).value, $(SELECTOR.PRODUCT_QUANTITY_INPUT).value);
@@ -85,7 +88,9 @@ export class Controller {
 
     machineCoinChargeButtonHandler() {
         $(SELECTOR.COIN_CHARGE_BUTTON).onclick = () => {
-            if (!verifyBalance($(SELECTOR.COIN_CHARGE_INPUT))) {
+            const verifyResult = verifyBalance($(SELECTOR.COIN_CHARGE_INPUT));
+            if (!verifyResult.status) {
+                this.view.showAlert(verifyResult.errorCode);
                 return;
             }
             this.vendingMachine.addMachineCoinRandomly($(SELECTOR.COIN_CHARGE_INPUT).value);
@@ -97,7 +102,9 @@ export class Controller {
     chargeUserBalanceButtonHandler() {
         $(SELECTOR.PURCHASE_CHARGE_BUTTON).onclick = () => {
             const balanceInput = $(SELECTOR.PURCHASE_CHARGE_INPUT);
-            if (!verifyBalance(balanceInput)) {
+            const verifyResult = verifyBalance(balanceInput);
+            if (!verifyResult.status) {
+                this.view.showAlert(verifyResult.errorCode);
                 return;
             }
             this.vendingMachine.chargeUserBalance(balanceInput.value);
