@@ -69,18 +69,18 @@ export class Controller {
 
     addPurchaseButtonHandler() {
         const buttonList = document.querySelectorAll(SELECTOR.PURCHASE_ITEM_BUTTON);
-        buttonList.forEach((button, inx) => {
+        buttonList.forEach((button, idx) => {
             button.onclick = () => {
-                if (!verityEnoughBalance(this.vendingMachine.userBalance, this.vendingMachine.products[inx].price)) {
+                if (!verityEnoughBalance(this.vendingMachine.userBalance, this.vendingMachine.products[idx].price)) {
                     return
                 }
-                this.vendingMachine.purchaseProduct(inx);
+                this.vendingMachine.purchaseProduct(idx);
                 this.view.renderProductList(this.vendingMachine.products);
                 this.view.renderPurchaseList(this.vendingMachine.products);
                 this.addPurchaseButtonHandler();
                 this.view.renderUserBalance(this.vendingMachine.userBalance);
             }
-        })
+        });
     }
 
     machineCoinChargeButtonHandler() {

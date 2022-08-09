@@ -1,6 +1,6 @@
 import {Product} from "./product.js";
 import {COINS} from "../constants/constants.js";
-import {pickRandomNumInList} from "../utils/utils.js";
+import {getLocalStorage, pickRandomNumInList, setLocalStorage} from "../utils/utils.js";
 
 export class VendingMachine {
     constructor() {
@@ -24,7 +24,7 @@ export class VendingMachine {
     }
 
     initProduct() {
-        const productDatas = JSON.parse(localStorage.getItem('productList'));
+        const productDatas = getLocalStorage('productList');
         if (productDatas) {
             productDatas.forEach(productData => {
                 this.products.push(new Product(productData.name, Number(productData.quantity), Number(productData.price)))
@@ -33,21 +33,21 @@ export class VendingMachine {
     }
 
     initCoin() {
-        if (JSON.parse(localStorage.getItem('machineCoin'))) {
-            this.machineCoins = JSON.parse(localStorage.getItem('machineCoin'));
+        if (getLocalStorage('machineCoin')) {
+            this.machineCoins = getLocalStorage('machineCoin');
         }
     }
 
     initBalance() {
-        if (JSON.parse(localStorage.getItem('userBalance'))) {
-            this.userBalance = JSON.parse(localStorage.getItem('userBalance'));
+        if (getLocalStorage('userBalance')) {
+            this.userBalance = getLocalStorage('userBalance');
         }
     }
 
     addProduct(name, price, quantity) {
         const newProduct = new Product(name, quantity, price);
         this.products.push(newProduct);
-        localStorage.setItem('productList', JSON.stringify(this.products));
+        getLocalStorage('productList',this.products)
     }
 
     addMachineCoinRandomly(balance) {
@@ -70,18 +70,28 @@ export class VendingMachine {
     addMachineCoin(coinValue) {
         const coinIndex = this.machineCoins.findIndex(coin => coin.value === coinValue);
         this.machineCoins[coinIndex].quantity += 1;
-        localStorage.setItem('machineCoin', JSON.stringify(this.machineCoins));
+        setLocalStorage('machineCoin',this.machineCoins)
     }
 
     chargeUserBalance(balance) {
         this.userBalance += Number(balance);
-        localStorage.setItem('userBalance', this.userBalance);
+        setLocalStorage('userBalance',this.userBalance)
     }
 
     purchaseProduct(index) {
-        this.products[index].quantity -= 1;
-        this.userBalance -= this.products[index].price;
-        localStorage.setItem('productList', JSON.stringify(this.products));
+        const newProducts = this.reduceProductQuantity(index,1);
+        this.reduceUserBalance(this.products[index].price);
+        setLocalStorage('productList',newProducts)
+    }
+    
+    reduceProductQuantity(index,quantity){
+        this.products[index].quantity -= quantity;
+        return this.products;
+    }
+
+    reduceUserBalance(balance){
+        this.userBalance -= balance
+        return this.products;
     }
 
     returnChargeCoins() {
@@ -96,7 +106,7 @@ export class VendingMachine {
         this.machineCoins.map((currentCoin, idx) => {
             currentCoin.quantity -= this.returnCoins[idx].quantity;
         })
-        localStorage.setItem('userBalance', this.userBalance);
+        setLocalStorage('userBalance',this.userBalance);
     }
 
     resetReturnCoins(){
