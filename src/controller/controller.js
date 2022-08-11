@@ -18,9 +18,9 @@ export class Controller {
         this.initRender();
         this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
         this.view.registerProductAddHandler(this.onAddProduct);
-        this.view.registerMachineCoinChargeButtonHandler(this.chargeMachineCoin);
-        this.view.registerUserBalanceButtonHandler(this.onChargeUserBalance);
-        this.view.registerReturnCoinButtonHandler(this.onReturnCoin);
+        this.view.registerMachineCoinChargeRequastedHandler(this.chargeMachineCoin);
+        this.view.registerUserBalanceRequestedHandler(this.onChargeUserBalance);
+        this.view.registerReturnCoinRequestedHandler(this.onReturnCoin);
     }
 
     initRender() {

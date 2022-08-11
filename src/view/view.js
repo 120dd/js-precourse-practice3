@@ -41,7 +41,7 @@ export class View {
         }
     }
 
-    registerMachineCoinChargeButtonHandler(callback) {
+    registerMachineCoinChargeRequastedHandler(callback) {
         $(SELECTOR.COIN_CHARGE_BUTTON).onclick = (e) => {
             e.preventDefault();
             const balanceInput = $(SELECTOR.COIN_CHARGE_INPUT);
@@ -59,7 +59,7 @@ export class View {
         })
     }
 
-    registerUserBalanceButtonHandler(callback) {
+    registerUserBalanceRequestedHandler(callback) {
         $(SELECTOR.PURCHASE_CHARGE_BUTTON).onclick = () => {
             const balanceInput = $(SELECTOR.PURCHASE_CHARGE_INPUT);
             callback(balanceInput.value);
@@ -67,7 +67,7 @@ export class View {
         }
     }
 
-    registerReturnCoinButtonHandler(callback) {
+    registerReturnCoinRequestedHandler(callback) {
         $(SELECTOR.COIN_RETURN_BUTTON).onclick = () => {
             callback();
         }
