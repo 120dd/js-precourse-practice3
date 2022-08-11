@@ -16,9 +16,9 @@ export class Controller {
         this.vendingMachine = new VendingMachine();
         this.view = new View();
         this.initRender();
+        this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
         this.view.registerProductAddHandler(this.onAddProduct);
         this.view.registerMachineCoinChargeButtonHandler(this.chargeMachineCoin);
-        this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
         this.view.registerUserBalanceButtonHandler(this.onChargeUserBalance);
         this.view.registerReturnCoinButtonHandler(this.onReturnCoin);
     }
@@ -41,6 +41,7 @@ export class Controller {
         this.vendingMachine.addProduct(product.name, Number(product.price), Number(product.quantity));
         this.view.renderProductList(this.vendingMachine.products);
         this.view.renderPurchaseList(this.vendingMachine.products);
+        this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
     }
 
     onPurchaseProduct = (productIndex) => {
