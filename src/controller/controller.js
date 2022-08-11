@@ -44,7 +44,9 @@ export class Controller {
     }
 
     onPurchaseProduct = (productIndex) => {
-        if (!(verityEnoughBalance(this.vendingMachine.userBalance, this.vendingMachine.products[productIndex].price)).status) {
+        const verifyResult = verityEnoughBalance(this.vendingMachine.userBalance, this.vendingMachine.products[productIndex].price);
+        if (!verifyResult.status) {
+            this.view.showAlert(verifyResult.errorCode);
             return
         }
         this.vendingMachine.purchaseProduct(productIndex);
@@ -52,8 +54,6 @@ export class Controller {
         this.view.renderPurchaseList(this.vendingMachine.products);
         this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
         this.view.renderUserBalance(this.vendingMachine.userBalance);
-        console.log(this.vendingMachine.userBalance);
-        console.log(this.vendingMachine.products[productIndex].price);
     }
     
     onChargeUserBalance = (balance) =>{
