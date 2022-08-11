@@ -23,6 +23,61 @@ export class View {
         this.renderChargeCoinTab();
         this.renderProductPurchaseTab();
         this.renderPurchaseList();
+        this.chargeCoinButtonTabHandler();
+        this.productManageTabButtonHandler();
+        this.productPurchaseButtonTabHandler();
+    }
+
+    registerProductAddHandler(callback) {
+        $(SELECTOR.PRODUCT_ADD_BUTTON).onclick = (e) => {
+            e.preventDefault();
+            const product = {
+                name: $(SELECTOR.PRODUCT_NAME_INPUT).value,
+                price: $(SELECTOR.PRODUCT_PRICE_INPUT).value,
+                quantity: $(SELECTOR.PRODUCT_QUANTITY_INPUT).value,
+            }
+            callback(product);
+            this.resetListValue([$(SELECTOR.PRODUCT_NAME_INPUT), $(SELECTOR.PRODUCT_PRICE_INPUT), $(SELECTOR.PRODUCT_QUANTITY_INPUT)])
+        }
+    }
+
+    registerMachineCoinChargeButtonHandler(callback) {
+        $(SELECTOR.COIN_CHARGE_BUTTON).onclick = (e) => {
+            e.preventDefault();
+            const balanceInput = $(SELECTOR.COIN_CHARGE_INPUT);
+            callback(balanceInput.value)
+            balanceInput.value = '';
+        }
+    }
+
+    addPurchaseButtonHandler(callback) {
+        const buttonList = document.querySelectorAll(SELECTOR.PURCHASE_ITEM_BUTTON);
+        buttonList.forEach((button, productIndex) => {
+            button.onclick = () => {
+                callback(productIndex)
+            }
+        })
+    }
+
+    registerUserBalanceButtonHandler(callback) {
+        $(SELECTOR.PURCHASE_CHARGE_BUTTON).onclick = () => {
+            const balanceInput = $(SELECTOR.PURCHASE_CHARGE_INPUT);
+            callback(balanceInput.value);
+            balanceInput.value = '';
+        }
+    }
+
+    registerReturnCoinButtonHandler(callback) {
+        $(SELECTOR.COIN_RETURN_BUTTON).onclick = () => {
+            callback();
+        }
+
+    }
+
+    resetListValue(resetList) {
+        resetList.forEach((resetTarget) => {
+            resetTarget.value = ''
+        });
     }
 
     renderCommon() {
@@ -40,6 +95,12 @@ export class View {
         this.tabs.$productManageTab.after(this.tabs.$chargeCoinTab);
     }
 
+    chargeCoinButtonTabHandler() {
+        $(SELECTOR.COIN_MENU).onclick = () => {
+            this.showChargeCoinTab();
+        }
+    }
+
     renderProductPurchaseTab() {
         this.tabs.$productPurchaseTab.innerHTML = PRODUCT_PURCHASE_TAB;
         this.tabs.$productPurchaseTab.style.display = 'none';
@@ -50,6 +111,18 @@ export class View {
         this.tabs.$productManageTab.style.display = 'block';
         this.tabs.$chargeCoinTab.style.display = 'none';
         this.tabs.$productPurchaseTab.style.display = 'none';
+    }
+
+    productManageTabButtonHandler() {
+        $(SELECTOR.PRODUCT_MENU).onclick = () => {
+            this.showProductManageTab();
+        }
+    }
+
+    productPurchaseButtonTabHandler() {
+        $(SELECTOR.PURCHASE_MENU).onclick = () => {
+            this.showProductPurchaseTab();
+        }
     }
 
     showChargeCoinTab() {
@@ -114,8 +187,8 @@ export class View {
             $('#purchaseMenuTable').appendChild($product);
         });
     }
-    
-    showAlert(comment){
-        alert(comment);
+
+    showAlert(errorCode) {
+        alert(errorCode);
     }
 }

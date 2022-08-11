@@ -82,6 +82,7 @@ export class VendingMachine {
         this.products[index].quantity -= 1;
         this.userBalance -= this.products[index].price;
         localStorage.setItem('productList', JSON.stringify(this.products));
+        localStorage.setItem('userBalance', this.userBalance);
     }
 
     returnChargeCoins() {
