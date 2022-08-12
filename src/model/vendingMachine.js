@@ -5,16 +5,14 @@ import {pickRandomNumInList} from "../utils/utils.js";
 export class VendingMachine {
     constructor() {
         this.products = [];
-        this.machineCoins = [{value: COINS.COIN_500, quantity: 0}, {
-            value: COINS.COIN_100, quantity: 0
-        }, {value: COINS.COIN_50, quantity: 0}, {
-            value: COINS.COIN_10, quantity: 0
-        },];
-        this.returnCoins = [{value: COINS.COIN_500, quantity: 0}, {
-            value: COINS.COIN_100, quantity: 0
-        }, {value: COINS.COIN_50, quantity: 0}, {
-            value: COINS.COIN_10, quantity: 0
-        },];
+        this.machineCoins = [
+            {value: COINS.COIN_500, quantity: 0}, {value: COINS.COIN_100, quantity: 0},
+            {value: COINS.COIN_50, quantity: 0}, {value: COINS.COIN_10, quantity: 0},
+        ];
+        this.returnCoins = [
+            {value: COINS.COIN_500, quantity: 0}, {value: COINS.COIN_100, quantity: 0},
+            {value: COINS.COIN_50, quantity: 0}, {value: COINS.COIN_10, quantity: 0},
+        ];
         this.userBalance = 0;
         this.initProduct();
         this.initCoin();
@@ -26,7 +24,7 @@ export class VendingMachine {
         if (productDatas) {
             productDatas.forEach(productData => {
                 this.products.push(new Product(productData.name, Number(productData.quantity),
-                    Number(productData.price)));
+                                               Number(productData.price)));
             })
         }
     }
@@ -100,10 +98,9 @@ export class VendingMachine {
     }
 
     resetReturnCoins() {
-        this.returnCoins = [{value: COINS.COIN_500, quantity: 0}, {
-            value: COINS.COIN_100, quantity: 0
-        }, {value: COINS.COIN_50, quantity: 0}, {
-            value: COINS.COIN_10, quantity: 0
-        },];
+        this.returnCoins = [
+            {value: COINS.COIN_500, quantity: 0}, {value: COINS.COIN_100, quantity: 0},
+            {value: COINS.COIN_50, quantity: 0}, {value: COINS.COIN_10, quantity: 0},
+        ];
     }
 }
