@@ -1,7 +1,11 @@
 import {
-    CHARGE_COIN_TAB, CHARGED_BALANCE,
-    COMMON_HTML, PRODUCT_LIST,
-    PRODUCT_MANAGE_TAB, PRODUCT_PURCHASE_TAB, PURCHASE_PRODUCT_LIST
+    CHARGE_COIN_TAB,
+    CHARGED_BALANCE,
+    COMMON_HTML,
+    PRODUCT_LIST,
+    PRODUCT_MANAGE_TAB,
+    PRODUCT_PURCHASE_TAB,
+    PURCHASE_PRODUCT_LIST
 } from "../constants/templets.js";
 import {SELECTOR} from "../constants/constants.js";
 import {$} from "../utils/utils.js";
@@ -32,9 +36,11 @@ export class View {
     registerProductAddHandler(callback) {
         $(SELECTOR.PRODUCT_ADD_BUTTON).onclick = (e) => {
             e.preventDefault();
-            const newProduct = new Product($(SELECTOR.PRODUCT_NAME_INPUT).value,$(SELECTOR.PRODUCT_PRICE_INPUT).value,$(SELECTOR.PRODUCT_QUANTITY_INPUT).value)
+            const newProduct = new Product($(SELECTOR.PRODUCT_NAME_INPUT).value,
+                $(SELECTOR.PRODUCT_PRICE_INPUT).value, $(SELECTOR.PRODUCT_QUANTITY_INPUT).value)
             callback(newProduct);
-            this.resetListValue([$(SELECTOR.PRODUCT_NAME_INPUT), $(SELECTOR.PRODUCT_PRICE_INPUT), $(SELECTOR.PRODUCT_QUANTITY_INPUT)])
+            this.resetListValue([$(SELECTOR.PRODUCT_NAME_INPUT), $(SELECTOR.PRODUCT_PRICE_INPUT),
+                $(SELECTOR.PRODUCT_QUANTITY_INPUT)])
         }
     }
 
@@ -135,7 +141,8 @@ export class View {
     }
 
     renderProductList(productList) {
-        $(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_MANAGE_ITEM);
+        $(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) &&
+        this.removeProductList(SELECTOR.PRODUCT_MANAGE_ITEM);
         productList.map((product) => {
             const $productList = document.createElement('tr');
             $productList.setAttribute("class", SELECTOR.PRODUCT_MANAGE_ITEM);
@@ -158,7 +165,8 @@ export class View {
     }
 
     renderMachineCoins(vendingMachine) {
-        const coinQuantityNodes = [$(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50), $(SELECTOR.COIN_10)];
+        const coinQuantityNodes = [$(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50),
+            $(SELECTOR.COIN_10)];
         coinQuantityNodes.map((node, inx) => {
             this.renderCoin(node, vendingMachine.machineCoins[inx].quantity);
         })
@@ -176,11 +184,13 @@ export class View {
     }
 
     renderPurchaseList(productList) {
-        $(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) && this.removeProductList(SELECTOR.PRODUCT_PURCHASE_ITEM);
+        $(`.${SELECTOR.PRODUCT_MANAGE_ITEM}`) &&
+        this.removeProductList(SELECTOR.PRODUCT_PURCHASE_ITEM);
         productList?.map((product) => {
             const $product = document.createElement('tr');
             $product.setAttribute('class', SELECTOR.PRODUCT_PURCHASE_ITEM);
-            $product.innerHTML = PURCHASE_PRODUCT_LIST(product.name, product.price, product.quantity);
+            $product.innerHTML =
+                PURCHASE_PRODUCT_LIST(product.name, product.price, product.quantity);
             $('#purchaseMenuTable').appendChild($product);
         });
     }

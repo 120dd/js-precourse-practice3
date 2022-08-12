@@ -4,7 +4,8 @@ import {
     verifyBalance,
     verifyProductNameInput,
     verifyProductPriceInput,
-    verifyProductQuantityInput, verityEnoughBalance
+    verifyProductQuantityInput,
+    verityEnoughBalance
 } from "../utils/verifier.js";
 
 export class Controller {
@@ -31,21 +32,25 @@ export class Controller {
     }
 
     onAddProduct = (product) => {
-        const verifyResult = [verifyProductNameInput(product.name), verifyProductPriceInput(product.price), verifyProductQuantityInput(product.quantity)];
+        const verifyResult = [verifyProductNameInput(product.name),
+            verifyProductPriceInput(product.price), verifyProductQuantityInput(product.quantity)];
         const errorIndex = verifyResult.findIndex((result) => result.status === false);
         if (errorIndex !== -1) {
+
             const errorCode = verifyResult[errorIndex].errorCode;
             this.view.showAlert(errorCode);
             return
         }
-        this.vendingMachine.addProduct(product.name, Number(product.price), Number(product.quantity));
+        this.vendingMachine.addProduct(product.name, Number(product.price),
+            Number(product.quantity));
         this.view.renderProductList(this.vendingMachine.products);
         this.view.renderPurchaseList(this.vendingMachine.products);
         this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
     }
 
     onPurchaseProduct = (productIndex) => {
-        const verifyResult = verityEnoughBalance(this.vendingMachine.userBalance, this.vendingMachine.products[productIndex].price);
+        const verifyResult = verityEnoughBalance(this.vendingMachine.userBalance,
+            this.vendingMachine.products[productIndex].price);
         if (!verifyResult.status) {
             this.view.showAlert(verifyResult.errorCode);
             return
@@ -56,8 +61,8 @@ export class Controller {
         this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
         this.view.renderUserBalance(this.vendingMachine.userBalance);
     }
-    
-    onChargeUserBalance = (balance) =>{
+
+    onChargeUserBalance = (balance) => {
         const verifyResult = verifyBalance(balance);
         if (!verifyResult.status) {
             this.view.showAlert(verifyResult.errorCode);
@@ -66,7 +71,7 @@ export class Controller {
         this.vendingMachine.chargeUserBalance(balance);
         this.view.renderUserBalance(this.vendingMachine.userBalance);
     }
-    
+
     onReturnCoin = () => {
         this.vendingMachine.returnChargeCoins();
         this.view.renderUserBalance(this.vendingMachine.userBalance);
