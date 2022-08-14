@@ -1,12 +1,7 @@
 import {
-    CHARGE_COIN_TAB,
-    CHARGED_BALANCE,
-    COMMON_HTML,
-    PRODUCT_LIST,
-    PRODUCT_MANAGE_TAB,
-    PRODUCT_PURCHASE_TAB,
-    PURCHASE_PRODUCT_LIST
-} from "../constants/templets.js";
+    CHARGE_COIN_TAB, CHARGED_BALANCE, COMMON_HTML, PRODUCT_LIST, PRODUCT_MANAGE_TAB,
+    PRODUCT_PURCHASE_TAB, PURCHASE_PRODUCT_LIST
+} from "./templets.js";
 import {SELECTOR} from "../constants/constants.js";
 import {$} from "../utils/utils.js";
 import {Product} from "../model/product.js";
@@ -37,10 +32,13 @@ export class View {
         $(SELECTOR.PRODUCT_ADD_BUTTON).onclick = (e) => {
             e.preventDefault();
             const newProduct = new Product($(SELECTOR.PRODUCT_NAME_INPUT).value,
-                $(SELECTOR.PRODUCT_PRICE_INPUT).value, $(SELECTOR.PRODUCT_QUANTITY_INPUT).value)
+                                           $(SELECTOR.PRODUCT_PRICE_INPUT).value,
+                                           $(SELECTOR.PRODUCT_QUANTITY_INPUT).value)
             callback(newProduct);
-            this.resetListValue([$(SELECTOR.PRODUCT_NAME_INPUT), $(SELECTOR.PRODUCT_PRICE_INPUT),
-                $(SELECTOR.PRODUCT_QUANTITY_INPUT)])
+            this.resetListValue([
+                                    $(SELECTOR.PRODUCT_NAME_INPUT), $(SELECTOR.PRODUCT_PRICE_INPUT),
+                                    $(SELECTOR.PRODUCT_QUANTITY_INPUT)
+                                ])
         }
     }
 
@@ -165,8 +163,9 @@ export class View {
     }
 
     renderMachineCoins(vendingMachine) {
-        const coinQuantityNodes = [$(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50),
-            $(SELECTOR.COIN_10)];
+        const coinQuantityNodes = [
+            $(SELECTOR.COIN_500), $(SELECTOR.COIN_100), $(SELECTOR.COIN_50), $(SELECTOR.COIN_10)
+        ];
         coinQuantityNodes.map((node, inx) => {
             this.renderCoin(node, vendingMachine.machineCoins[inx].quantity);
         })

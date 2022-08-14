@@ -1,12 +1,9 @@
 import {VendingMachine} from "../model/vendingMachine.js";
 import {View} from "../view/view.js";
 import {
-    verifyBalance,
-    verifyProductNameInput,
-    verifyProductPriceInput,
-    verifyProductQuantityInput,
+    verifyBalance, verifyProductNameInput, verifyProductPriceInput, verifyProductQuantityInput,
     verityEnoughBalance
-} from "../utils/verifier.js";
+} from "./verifier.js";
 
 export class Controller {
     constructor() {
@@ -32,8 +29,10 @@ export class Controller {
     }
 
     onAddProduct = (product) => {
-        const verifyResult = [verifyProductNameInput(product.name),
-            verifyProductPriceInput(product.price), verifyProductQuantityInput(product.quantity)];
+        const verifyResult = [
+            verifyProductNameInput(product.name), verifyProductPriceInput(product.price),
+            verifyProductQuantityInput(product.quantity)
+        ];
         const errorIndex = verifyResult.findIndex((result) => result.status === false);
         if (errorIndex !== -1) {
 
@@ -42,7 +41,7 @@ export class Controller {
             return
         }
         this.vendingMachine.addProduct(product.name, Number(product.price),
-            Number(product.quantity));
+                                       Number(product.quantity));
         this.view.renderProductList(this.vendingMachine.products);
         this.view.renderPurchaseList(this.vendingMachine.products);
         this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
@@ -50,7 +49,7 @@ export class Controller {
 
     onPurchaseProduct = (productIndex) => {
         const verifyResult = verityEnoughBalance(this.vendingMachine.userBalance,
-            this.vendingMachine.products[productIndex].price);
+                                                 this.vendingMachine.products[productIndex].price);
         if (!verifyResult.status) {
             this.view.showAlert(verifyResult.errorCode);
             return
