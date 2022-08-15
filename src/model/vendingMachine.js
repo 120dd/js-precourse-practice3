@@ -27,7 +27,8 @@ export class VendingMachine {
         const productDatas = getLocalStorage('productList');
         if (productDatas) {
             productDatas.forEach(productData => {
-                this.products.push(new Product(productData.name, Number(productData.quantity), Number(productData.price)))
+                this.products.push(new Product(productData.name, Number(productData.quantity),
+                                               Number(productData.price)));
             })
         }
     }
@@ -52,13 +53,13 @@ export class VendingMachine {
 
     addMachineCoinRandomly(balance) {
         let remainBalance = balance;
-        remainBalance = this.repeatAddRandomCoin(remainBalance, COINS.COIN_500, [10, 50, 100, 500]);
-        remainBalance = this.repeatAddRandomCoin(remainBalance, COINS.COIN_100, [10, 50, 100]);
-        remainBalance = this.repeatAddRandomCoin(remainBalance, COINS.COIN_50, [10, 50]);
-        this.repeatAddRandomCoin(remainBalance, COINS.COIN_10, [10]);
+        remainBalance = this.addRandomCoinList(remainBalance, COINS.COIN_500, [10, 50, 100, 500]);
+        remainBalance = this.addRandomCoinList(remainBalance, COINS.COIN_100, [10, 50, 100]);
+        remainBalance = this.addRandomCoinList(remainBalance, COINS.COIN_50, [10, 50]);
+        this.addRandomCoinList(remainBalance, COINS.COIN_10, [10]);
     }
 
-    repeatAddRandomCoin(remainBalance, coinValue, coinArray) {
+    addRandomCoinList(remainBalance, coinValue, coinArray) {
         while (remainBalance >= coinValue) {
             const randomCoinValue = pickRandomNumInList(coinArray);
             this.addMachineCoin(randomCoinValue);
@@ -83,7 +84,7 @@ export class VendingMachine {
         this.reduceUserBalance(this.products[index].price);
         setLocalStorage('productList',newProducts)
     }
-    
+
     reduceProductQuantity(index,quantity){
         this.products[index].quantity -= quantity;
         return this.products;
@@ -109,7 +110,7 @@ export class VendingMachine {
         setLocalStorage('userBalance',this.userBalance);
     }
 
-    resetReturnCoins(){
+    resetReturnCoins() {
         this.returnCoins = [
             {value: COINS.COIN_500, quantity: 0},
             {value: COINS.COIN_100, quantity: 0},
