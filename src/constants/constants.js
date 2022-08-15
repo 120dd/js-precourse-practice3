@@ -17,18 +17,19 @@ export const SELECTOR = {
     PURCHASE_CHARGE_BUTTON: "#charge-button",
     PURCHASE_ITEM_BUTTON: ".purchase-button",
     PURCHASE_ITEM_QUANTITY: ".product-purchase-quantity",
-    PRODUCT_MANAGE_ITEM:'product-manage-item',
-    PRODUCT_PURCHASE_ITEM:'product-purchase-item',
-    COIN_RETURN_BUTTON:'#coin-return-button',
-    RETURN_COIN_500:'#coin-500-quantity',
-    RETURN_COIN_100:'#coin-100-quantity',
-    RETURN_COIN_50:'#coin-50-quantity',
-    RETURN_COIN_10:'#coin-10-quantity',
+    PRODUCT_MANAGE_ITEM: 'product-manage-item',
+    PRODUCT_PURCHASE_ITEM: 'product-purchase-item',
+    COIN_RETURN_BUTTON: '#coin-return-button',
+    RETURN_COIN_500: '#coin-500-quantity',
+    RETURN_COIN_100: '#coin-100-quantity',
+    RETURN_COIN_50: '#coin-50-quantity',
+    RETURN_COIN_10: '#coin-10-quantity',
 };
 
 export const COINS = {
-    COIN_500:500,
-    COIN_100:100,
-    COIN_50:50,
-    COIN_10:10,
+    COIN_500: 500,
+    COIN_100: 100,
+    COIN_50: 50,
+    COIN_10: 10,
 }
+
