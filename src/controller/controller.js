@@ -4,6 +4,7 @@ import {
     verifyBalance, verifyProductNameInput, verifyProductPriceInput, verifyProductQuantityInput,
     verityEnoughBalance
 } from "./verifier.js";
+import { LocalStoragePersist } from '../persist/LocalStoragePersist';
 
 export class Controller {
     constructor() {
@@ -11,7 +12,8 @@ export class Controller {
     }
 
     init() {
-        this.vendingMachine = new VendingMachine();
+        this.persist = new CookieStoragePersist();
+        this.vendingMachine = new VendingMachine(this.persist);
         this.view = new View();
         this.initRender();
         this.view.addPurchaseButtonHandler(this.onPurchaseProduct);

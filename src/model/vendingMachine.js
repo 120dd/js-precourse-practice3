@@ -1,11 +1,14 @@
 import { Product } from './product.js';
 import { COINS } from '../constants/constants.js';
 import { pickRandomNumInList } from '../utils/utils.js';
-import { DataPersister } from './dataPersister.js';
 
 export class VendingMachine {
-	constructor() {
-		this.dataPersister = new DataPersister();
+	constructor(persist) {
+		if (!persist) {
+			throw new Error("persist should be injected");
+		}
+
+		this.dataPersister = persist;
 		this.products = [];
 		this.machineCoins = [
 			{ value: COINS.COIN_500, quantity: 0 },
@@ -26,7 +29,7 @@ export class VendingMachine {
 	}
 
 	initProduct() {
-		const productDatas = this.dataPersister.getPersistData('productList');
+		const productDatas = this.dataPersister.load('productList');
 		if (productDatas) {
 			productDatas.forEach(productData => {
 				this.products.push(
@@ -38,7 +41,7 @@ export class VendingMachine {
 
 	initCoin() {
 		if (this.dataPersister.getPersistData('machineCoin')) {
-			this.machineCoins = this.dataPersister.getPersistData('machineCoin');
+			this.machineCoins = this.dataPersister.load('machineCoin');
 		}
 	}
 
