@@ -1,10 +1,12 @@
 import 'mock-local-storage';
+import { LocalDataPersister } from '../DataPersister/LocalDataPersister';
 
 const assert = require('assert');
 const { VendingMachine } = require('./vendingMachine.js');
 const { Product } = require('./product.js');
 
-const vendingMachine = new VendingMachine();
+const persister = new LocalDataPersister();
+const vendingMachine = new VendingMachine(persister);
 vendingMachine.products = [new Product('콜라', 20, 1200)];
 
 global.window = {};

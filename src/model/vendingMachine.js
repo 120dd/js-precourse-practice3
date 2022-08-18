@@ -1,11 +1,10 @@
 import { Product } from './product.js';
 import { COINS } from '../constants/constants.js';
 import { pickRandomNumInList } from '../utils/utils.js';
-import { DataPersister } from './dataPersister.js';
 
 export class VendingMachine {
-	constructor() {
-		this.dataPersister = new DataPersister();
+	constructor(persister) {
+		this.persister = persister;
 		this.products = [];
 		this.machineCoins = [
 			{ value: COINS.COIN_500, quantity: 0 },
@@ -26,7 +25,7 @@ export class VendingMachine {
 	}
 
 	initProduct() {
-		const productDatas = this.dataPersister.getPersistData('productList');
+		const productDatas = this.persister.load('productList');
 		if (productDatas) {
 			productDatas.forEach(productData => {
 				this.products.push(
@@ -37,21 +36,21 @@ export class VendingMachine {
 	}
 
 	initCoin() {
-		if (this.dataPersister.getPersistData('machineCoin')) {
-			this.machineCoins = this.dataPersister.getPersistData('machineCoin');
+		if (this.persister.load('machineCoin')) {
+			this.machineCoins = this.persister.load('machineCoin');
 		}
 	}
 
 	initBalance() {
-		if (this.dataPersister.getPersistData('userBalance')) {
-			this.userBalance = this.dataPersister.getPersistData('userBalance');
+		if (this.persister.load('userBalance')) {
+			this.userBalance = this.persister.load('userBalance');
 		}
 	}
 
 	addProduct(name, price, quantity) {
 		const newProduct = new Product(name, quantity, price);
 		this.products.push(newProduct);
-		this.dataPersister.setPersistData('productList', this.products);
+		this.persister.load('productList', this.products);
 	}
 
 	addMachineCoinRandomly(balance) {
@@ -74,19 +73,18 @@ export class VendingMachine {
 	addMachineCoin(coinValue) {
 		const coinIndex = this.machineCoins.findIndex(coin => coin.value === coinValue);
 		this.machineCoins[coinIndex].quantity += 1;
-		this.dataPersister.setPersistData('machineCoin', this.machineCoins);
+		this.persister.save('machineCoin', this.machineCoins);
 	}
 
 	chargeUserBalance(balance) {
 		this.userBalance += Number(balance);
-		this.dataPersister.setPersistData('userBalance', this.userBalance);
+		this.persister.save('userBalance', this.userBalance);
 	}
 
 	purchaseProduct(index) {
 		const newProducts = this.reduceProductQuantity(index, 1);
 		this.reduceUserBalance(this.products[index].price);
-		this.dataPersister.setPersistData('productList', newProducts);
-		this.dataPersister.setPersistData('userBalance', this.userBalance);
+		this.persister.save('productList', newProducts);
 	}
 
 	reduceProductQuantity(index, quantity) {
@@ -111,7 +109,7 @@ export class VendingMachine {
 		this.machineCoins.map((currentCoin, idx) => {
 			currentCoin.quantity -= this.returnCoins[idx].quantity;
 		});
-		this.dataPersister.setPersistData('userBalance', this.userBalance);
+		this.persister.save('userBalance', this.userBalance);
 	}
 
 	resetReturnCoins() {
