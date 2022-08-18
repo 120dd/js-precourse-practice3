@@ -1,12 +1,6 @@
 import { VendingMachine } from '../model/vendingMachine.js';
 import { View } from '../view/view.js';
-import {
-	verifyBalance,
-	verifyProductNameInput,
-	verifyProductPriceInput,
-	verifyProductQuantityInput,
-	verityEnoughBalance,
-} from './verifier.js';
+import { verifyBalance, verifyProduct, verityEnoughBalance } from './verifier.js';
 import { LocalDataPersister } from '../DataPersister/LocalDataPersister.js';
 
 export class Controller {
@@ -18,7 +12,11 @@ export class Controller {
 		this.persister = new LocalDataPersister();
 		this.vendingMachine = new VendingMachine(this.persister);
 		this.view = new View();
-		this.initRender();
+		this.view.renderVendingMachine(this.vendingMachine);
+		this.initHandlers();
+	}
+
+	initHandlers() {
 		this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
 		this.view.registerProductAddHandler(this.onAddProduct);
 		this.view.registerMachineCoinChargeRequastedHandler(this.chargeMachineCoin);
@@ -26,28 +24,16 @@ export class Controller {
 		this.view.registerReturnCoinRequestedHandler(this.onReturnCoin);
 	}
 
-	initRender() {
-		this.view.renderProductList(this.vendingMachine.products);
-		this.view.renderPurchaseList(this.vendingMachine.products);
-		this.view.renderMachineCoins(this.vendingMachine);
-		this.view.renderUserBalance(this.vendingMachine.userBalance);
-	}
-
 	onAddProduct = product => {
-		const verifyResult = [
-			verifyProductNameInput(product.name),
-			verifyProductPriceInput(product.price),
-			verifyProductQuantityInput(product.quantity),
-		];
+		const verifyResult = verifyProduct(product);
 		const errorIndex = verifyResult.findIndex(result => result.status === false);
 		if (errorIndex !== -1) {
 			const errorCode = verifyResult[errorIndex].errorCode;
 			this.view.showAlert(errorCode);
 			return;
 		}
-		this.vendingMachine.addProduct(product.name, Number(product.price), Number(product.quantity));
-		this.view.renderProductList(this.vendingMachine.products);
-		this.view.renderPurchaseList(this.vendingMachine.products);
+		this.vendingMachine.addProduct(product);
+		this.view.renderVendingMachine(this.vendingMachine);
 		this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
 	};
 
@@ -61,10 +47,8 @@ export class Controller {
 			return;
 		}
 		this.vendingMachine.purchaseProduct(productIndex);
-		this.view.renderProductList(this.vendingMachine.products);
-		this.view.renderPurchaseList(this.vendingMachine.products);
+		this.view.renderVendingMachine(this.vendingMachine);
 		this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
-		this.view.renderUserBalance(this.vendingMachine.userBalance);
 	};
 
 	onChargeUserBalance = balance => {
@@ -74,14 +58,12 @@ export class Controller {
 			return;
 		}
 		this.vendingMachine.chargeUserBalance(balance);
-		this.view.renderUserBalance(this.vendingMachine.userBalance);
+		this.view.renderVendingMachine(this.vendingMachine);
 	};
 
 	onReturnCoin = () => {
 		this.vendingMachine.returnChargeCoins();
-		this.view.renderUserBalance(this.vendingMachine.userBalance);
-		this.view.renderMachineCoins(this.vendingMachine);
-		this.view.renderReturnCoins(this.vendingMachine);
+		this.view.renderVendingMachine(this.vendingMachine);
 		this.vendingMachine.resetReturnCoins();
 	};
 

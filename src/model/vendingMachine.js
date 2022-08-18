@@ -29,7 +29,7 @@ export class VendingMachine {
 		if (productDatas) {
 			productDatas.forEach(productData => {
 				this.products.push(
-					new Product(productData.name, Number(productData.quantity), Number(productData.price)),
+					new Product(productData.name, Number(productData.price), Number(productData.quantity)),
 				);
 			});
 		}
@@ -47,10 +47,9 @@ export class VendingMachine {
 		}
 	}
 
-	addProduct(name, price, quantity) {
-		const newProduct = new Product(name, quantity, price);
+	addProduct(newProduct) {
 		this.products.push(newProduct);
-		this.persister.load('productList', this.products);
+		this.persister.save('productList', this.products);
 	}
 
 	addMachineCoinRandomly(balance) {
@@ -85,6 +84,7 @@ export class VendingMachine {
 		const newProducts = this.reduceProductQuantity(index, 1);
 		this.reduceUserBalance(this.products[index].price);
 		this.persister.save('productList', newProducts);
+		this.persister.save('userBalance', this.userBalance);
 	}
 
 	reduceProductQuantity(index, quantity) {
@@ -110,6 +110,7 @@ export class VendingMachine {
 			currentCoin.quantity -= this.returnCoins[idx].quantity;
 		});
 		this.persister.save('userBalance', this.userBalance);
+		this.persister.save('machineCoin', this.machineCoins);
 	}
 
 	resetReturnCoins() {
