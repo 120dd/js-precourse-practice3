@@ -17,8 +17,8 @@ export class Controller {
 	}
 
 	initHandlers() {
-		this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
 		this.view.registerProductAddHandler(this.onAddProduct);
+		this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
 		this.view.registerMachineCoinChargeRequastedHandler(this.chargeMachineCoin);
 		this.view.registerUserBalanceRequestedHandler(this.onChargeUserBalance);
 		this.view.registerReturnCoinRequestedHandler(this.onReturnCoin);
@@ -34,7 +34,7 @@ export class Controller {
 		}
 		this.vendingMachine.addProduct(product);
 		this.view.renderVendingMachine(this.vendingMachine);
-		this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
+		this.initHandlers();
 	};
 
 	onPurchaseProduct = productIndex => {
@@ -48,7 +48,7 @@ export class Controller {
 		}
 		this.vendingMachine.purchaseProduct(productIndex);
 		this.view.renderVendingMachine(this.vendingMachine);
-		this.view.addPurchaseButtonHandler(this.onPurchaseProduct);
+		this.initHandlers();
 	};
 
 	onChargeUserBalance = balance => {
@@ -58,12 +58,14 @@ export class Controller {
 			return;
 		}
 		this.vendingMachine.chargeUserBalance(balance);
-		this.view.renderVendingMachine(this.vendingMachine);
+		this.view.renderVendingMachine(this.vendingMachine)
+		this.initHandlers();
 	};
 
 	onReturnCoin = () => {
 		this.vendingMachine.returnChargeCoins();
 		this.view.renderVendingMachine(this.vendingMachine);
+		this.initHandlers();
 		this.vendingMachine.resetReturnCoins();
 	};
 
@@ -75,5 +77,6 @@ export class Controller {
 		}
 		this.vendingMachine.addMachineCoinRandomly(balance);
 		this.view.renderMachineCoins(this.vendingMachine);
+		this.initHandlers();
 	};
 }
