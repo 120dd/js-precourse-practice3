@@ -1,5 +1,5 @@
 export function pickRandomNumInList(list) {
-    return MissionUtils.Random.pickNumberInList(list);
+	return MissionUtils.Random.pickNumberInList(list);
 }
 
-export const $ = (selector) => document.querySelector(selector);
+export const $ = selector => document.querySelector(selector);

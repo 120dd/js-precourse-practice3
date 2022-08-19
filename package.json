@@ -2,7 +2,7 @@
   "name": "javascript-vendingmachine-precourse",
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 자판기 미션",
-  "type": "module",
+  "type": "commonjs",
   "devDependencies": {
     "@babel/preset-env": "^7.18.9",
     "@babel/register": "^7.18.9",
@@ -16,6 +16,7 @@
     "eslint-plugin-mocha": "^10.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "mocha": "^10.0.0",
+    "mock-local-storage": "^1.1.23",
     "prettier": "^2.7.1"
   },
   "scripts": {
